@@ -1,0 +1,25 @@
+info:
+  name: Unhandled 500 Entity Leak on Sort
+  type: http
+  seq: 6
+
+http:
+  method: GET
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/late-early-policies/getAll?page=0&size=10&sort=non_existent_column,desc
+  params:
+    - name: page
+      value: "0"
+      type: query
+    - name: size
+      value: "10"
+      type: query
+    - name: sort
+      value: non_existent_column,desc
+      type: query
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

@@ -672,3 +672,52 @@ In `LateEarlyPolicyRequestDto.java`, add `@NotBlank` and regex pattern constrain
 )
 private String policyName;
 ```
+
+---
+
+## ðŸž BUG 7: Unhandled 500 Internal Server Error & JPA Entity Leak on Invalid Sort Query Parameter in Late/Early Policy
+
+* **Defect ID:** `BUG-HCM-ATT-007`
+* **Module:** Late / Early Policy Master
+* **HTTP Method:** `GET`
+* **Request URL:** `https://uatmcdphcmplatform.omfysgroup.com/api/attendance/late-early-policies/getAll?page=0&size=10&sort=non_existent_column,desc`
+* **Request Headers:**
+  ```http
+  Authorization: Bearer {{authToken}}
+  Content-Type: application/json
+  ```
+* **Request Body:** *None (GET request)*
+
+### âŒ Actual Response Received (HTTP 500 Internal Server Error â€” Unhandled Exception & Entity Leak):
+```json
+{
+  "status": "error",
+  "errorCode": "500",
+  "message": "No property 'non' found for type 'LateEarlyPolicyMaster'",
+  "timestamp": "18-Aug-2026 T14:59:09"
+}
+```
+
+### âœ”ï¸ Expected Response (HTTP 400 Bad Request):
+```json
+{
+  "status": "error",
+  "errorCode": "400",
+  "message": "Invalid sort property: 'non_existent_column'",
+  "timestamp": "18-Aug-2026 T14:59:09"
+}
+```
+
+### ðŸ”§ Developer Fix:
+In global `@ControllerAdvice` (`GlobalExceptionHandler.java`), add an exception handler for Spring Data's `PropertyReferenceException` to sanitize the error and return HTTP `400 Bad Request`:
+```java
+@ExceptionHandler(PropertyReferenceException.class)
+public ResponseEntity<ErrorResponseDto> handlePropertyReferenceException(PropertyReferenceException ex) {
+    ErrorResponseDto error = new ErrorResponseDto(
+        "error", 
+        "400", 
+        "Invalid sort property: '" + ex.getPropertyName() + "'"
+    );
+    return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+}
+```
