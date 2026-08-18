@@ -1,0 +1,68 @@
+﻿info:
+  name: CREATE_Holiday
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/holiday-templates/create
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "templateCode": "HTP_2027_TEST",
+        "templateName": "National Holidays 2027",
+        "description": "Standard Holiday Template 2027",
+        "effectiveFrom": "2027-01-01",
+        "effectiveTo": "2027-12-31",
+        "optionModel": "ALLOWED",
+        "templateMode": "CUSTOM",
+        "isDefault": "N",
+        "isActive": "Y",
+        "templateStatus": "DRAFT",
+        "remarks": "Created via Bruno UAT",
+        "holidays": [
+          {
+            "holidayName": "Republic Day",
+            "occasion": "National Holiday",
+            "holidayDate": "2027-01-26",
+            "optionModel": "ALLOWED",
+            "isOptional": "N",
+            "isHalfDay": "N",
+            "remarks": "Republic Day 2027"
+          }
+        ],
+        "assignments": [
+          {
+            "employeeId": 4261,
+            "effectiveFrom": "2027-01-01",
+            "effectiveTo": "2027-12-31",
+            "isActive": "Y"
+          }
+        ]
+      }
+  auth:
+    type: bearer
+    token: "{{authToken}}"
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        const resData = res.getBody();
+        console.log("Status Code:", res.getStatus());
+        console.log("Response Body:", JSON.stringify(resData, null, 2));
+        if (resData && resData.status === "success" && resData.data && resData.data.holidayTemplateId) {
+            bru.setVar("holidayTemplateId", resData.data.holidayTemplateId);
+            bru.setEnvVar("holidayTemplateId", resData.data.holidayTemplateId);
+            console.log("âœ” Saved holidayTemplateId:", resData.data.holidayTemplateId);
+        }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

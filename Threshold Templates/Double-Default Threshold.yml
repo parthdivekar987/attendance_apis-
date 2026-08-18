@@ -1,0 +1,48 @@
+﻿info:
+  name: Double-Default Threshold
+  type: http
+  seq: 9
+
+http:
+  method: POST
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/status-threshold/create
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "thresholdCode": "TH_DEF_COLLISION_01",
+        "thresholdName": "Second Default Threshold Test",
+        "description": "Testing if system allows multiple active default templates",
+        "templateMode": "DEFAULT",
+        "shiftTypeApplicability": "ALL",
+        "absentMaxHours": 3.00,
+        "halfDayMinHours": 3.01,
+        "fullDayMinHours": 6.00,
+        "presentMinHours": 8.00,
+        "effectiveFrom": "2027-01-01",
+        "effectiveTo": "2027-12-31",
+        "isDefault": "Y",
+        "isActive": "Y",
+        "templateStatus": "PUBLISHED",
+        "remarks": "Double default collision test",
+        "assignments": []
+      }
+  auth:
+    type: bearer
+    token: "{{authToken}}"
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        console.log("Status:", res.getStatus());
+        console.log("Response:", JSON.stringify(res.getBody(), null, 2));
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

@@ -1,0 +1,59 @@
+﻿info:
+  name: Duplicate templateCode Database Crash Test
+  type: http
+  seq: 6
+
+http:
+  method: POST
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/holiday-templates/create
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "templateCode": "HTP00096",
+        "templateName": "Duplicate Code Crash Test",
+        "effectiveFrom": "2027-01-01",
+        "effectiveTo": "2027-12-31",
+        "optionModel": "ALLOWED",
+        "templateMode": "CUSTOM",
+        "isDefault": "N",
+        "isActive": "Y",
+        "holidays": [
+          {
+            "holidayName": "New Year",
+            "occasion": "National Holiday",
+            "holidayDate": "2027-01-01",
+            "optionModel": "ALLOWED",
+            "isHalfDay": "N",
+            "isOptional": "N",
+            "remarks": "New Year"
+          }
+        ],
+        "assignments": [
+          {
+            "employeeId": 4261,
+            "effectiveFrom": "2027-01-01",
+            "effectiveTo": "2027-12-31",
+            "isActive": "Y"
+          }
+        ]
+      }
+  auth:
+    type: bearer
+    token: "{{authToken}}"
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        console.log("Status:", res.getStatus());
+        console.log("Response:", JSON.stringify(res.getBody(), null, 2));
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

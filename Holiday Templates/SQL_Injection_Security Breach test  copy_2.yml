@@ -1,0 +1,54 @@
+info:
+  name: SQL_Injection_Security Breach test  copy_2
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/holiday-templates/create
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |
+      {
+        "templateCode": "HTP_SEC_01",
+        "templateName": "Security Audit Template 2031",
+        "description": "Test description <script>alert('SEC_VULN')</script> and ' OR '1'='1' --",
+        "effectiveFrom": "2031-01-01",
+        "effectiveTo": "2031-12-31",
+        "optionModel": "ALLOWED",
+        "templateMode": "CUSTOM",
+        "isDefault": "N",
+        "isActive": "Y",
+        "remarks": "<img src=x onerror=alert('REMARKS_XSS')> -- SQL Test",
+        "holidays": [
+          {
+            "holidayName": "Audit Holiday",
+            "occasion": "Festival & Celebration <svg onload=alert(1)>",
+            "holidayDate": "2031-01-26",
+            "optionModel": "ALLOWED",
+            "isHalfDay": "N",
+            "isOptional": "N",
+            "remarks": "Special ' quote & double \" quote test"
+          }
+        ],
+        "assignments": [
+          {
+            "employeeId": 34,
+            "effectiveFrom": "2031-01-01",
+            "effectiveTo": "2031-12-31",
+            "isActive": "Y"
+          }
+        ]
+      }
+  auth:
+    type: bearer
+    token: "{{authToken}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

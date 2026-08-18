@@ -1,0 +1,24 @@
+﻿info:
+  name: DELETE Status Threshold
+  type: http
+  seq: 11
+
+http:
+  method: DELETE
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/status-thresholds/delete/80
+  auth:
+    type: bearer
+    token: "{{authToken}}"
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        console.log("Status:", res.getStatus());
+        console.log("Response:", JSON.stringify(res.getBody(), null, 2));
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

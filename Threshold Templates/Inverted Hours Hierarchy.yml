@@ -1,0 +1,55 @@
+﻿info:
+  name: Inverted Hours Hierarchy
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/status-threshold/create
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "thresholdCode": "TH_INVERTED_01",
+        "thresholdName": "Inverted Hours Threshold Test",
+        "description": "Testing logic when absent hours > present hours",
+        "templateMode": "CUSTOM",
+        "shiftTypeApplicability": "Fixed",
+        "absentMaxHours": 8.00,
+        "halfDayMinHours": 6.00,
+        "fullDayMinHours": 4.00,
+        "presentMinHours": 2.00,
+        "effectiveFrom": "2027-01-01",
+        "effectiveTo": "2027-12-31",
+        "isDefault": "N",
+        "isActive": "Y",
+        "templateStatus": "DRAFT",
+        "remarks": "Inverted hour validation test",
+        "assignments": [
+          {
+            "employeeId": 34,
+            "effectiveFrom": "2027-01-01",
+            "effectiveTo": "2027-12-31",
+            "isActive": "Y"
+          }
+        ]
+      }
+  auth:
+    type: bearer
+    token: "{{authToken}}"
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        console.log("Status:", res.getStatus());
+        console.log("Response:", JSON.stringify(res.getBody(), null, 2));
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

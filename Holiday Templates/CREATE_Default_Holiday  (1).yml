@@ -1,0 +1,55 @@
+﻿info:
+  name: CREATE_Default_Holiday
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/holiday-templates/create
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "templateCode": "HTP_DEF_2027",
+        "templateName": "Default National Holidays 2027",
+        "description": "Default Organization Holiday Template",
+        "effectiveFrom": "2027-01-01",
+        "effectiveTo": "2027-12-31",
+        "optionModel": "ALLOWED",
+        "templateMode": "DEFAULT",
+        "isDefault": "Y",
+        "isActive": "Y",
+        "templateStatus": "PUBLISHED",
+        "remarks": "Default organization holidays",
+        "holidays": [
+          {
+            "holidayName": "Independence Day",
+            "occasion": "National Holiday",
+            "holidayDate": "2027-08-15",
+            "optionModel": "ALLOWED",
+            "isOptional": "N",
+            "isHalfDay": "N",
+            "remarks": "Independence Day 2027"
+          }
+        ],
+        "assignments": []
+      }
+  auth:
+    type: bearer
+    token: "{{authToken}}"
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        console.log("Status:", res.getStatus());
+        console.log("Response:", JSON.stringify(res.getBody(), null, 2));
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

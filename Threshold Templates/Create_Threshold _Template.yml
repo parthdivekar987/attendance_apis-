@@ -1,0 +1,67 @@
+﻿info:
+  name: Create_Threshold _Template
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/status-threshold/create
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "thresholdCode": "TH_STD_2027",
+        "thresholdName": "Standard Attendance Status Threshold",
+        "description": "Standard attendance threshold configuration for regular shifts",
+        "templateMode": "CUSTOM",
+        "shiftTypeApplicability": "Fixed",
+        "absentMaxHours": 3.00,
+        "halfDayMinHours": 3.01,
+        "fullDayMinHours": 6.00,
+        "presentMinHours": 8.00,
+        "effectiveFrom": "2027-01-01",
+        "effectiveTo": "2027-12-31",
+        "isDefault": "N",
+        "isActive": "Y",
+        "templateStatus": "DRAFT",
+        "remarks": "Clean mandatory field verification",
+        "assignments": [
+          {
+            "employeeId": 34,
+            "effectiveFrom": "2027-01-01",
+            "effectiveTo": "2027-12-31",
+            "isActive": "Y"
+          },
+          {
+            "employeeId": 4261,
+            "effectiveFrom": "2027-01-01",
+            "effectiveTo": "2027-12-31",
+            "isActive": "Y"
+          }
+        ]
+      }
+  auth:
+    type: bearer
+    token: "{{authToken}}"
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        const resData = res.getBody();
+        console.log("Status Code:", res.getStatus());
+        console.log("Response Body:", JSON.stringify(resData, null, 2));
+        if (resData && resData.status === "success" && resData.data && resData.data.thresholdId) {
+            bru.setVar("thresholdId", resData.data.thresholdId);
+            bru.setEnvVar("thresholdId", resData.data.thresholdId);
+            console.log("âœ” Saved thresholdId:", resData.data.thresholdId);
+        }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

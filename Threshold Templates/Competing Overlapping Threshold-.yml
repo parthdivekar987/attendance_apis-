@@ -1,0 +1,61 @@
+﻿info:
+  name: Competing Overlapping Threshold
+  type: http
+  seq: 8
+
+http:
+  method: POST
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/status-threshold/create
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "thresholdCode": "TH_OVERLAP_COLLISION",
+        "thresholdName": "Competing Overlapping Shift Threshold 2027",
+        "description": "Testing if system prevents double-assigning employees to overlapping thresholds",
+        "templateMode": "CUSTOM",
+        "shiftTypeApplicability": "Fixed",
+        "absentMaxHours": 2.50,
+        "halfDayMinHours": 2.51,
+        "fullDayMinHours": 5.00,
+        "presentMinHours": 7.50,
+        "effectiveFrom": "2027-08-01",
+        "effectiveTo": "2027-10-31",
+        "isDefault": "N",
+        "isActive": "Y",
+        "templateStatus": "DRAFT",
+        "remarks": "Overlap collision integrity test",
+        "assignments": [
+          {
+            "employeeId": 34,
+            "effectiveFrom": "2027-08-01",
+            "effectiveTo": "2027-10-31",
+            "isActive": "Y"
+          },
+          {
+            "employeeId": 4261,
+            "effectiveFrom": "2027-08-01",
+            "effectiveTo": "2027-10-31",
+            "isActive": "Y"
+          }
+        ]
+      }
+  auth:
+    type: bearer
+    token: "{{authToken}}"
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        console.log("Status:", res.getStatus());
+        console.log("Response:", JSON.stringify(res.getBody(), null, 2));
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

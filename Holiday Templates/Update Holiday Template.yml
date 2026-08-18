@@ -1,0 +1,63 @@
+﻿info:
+  name: Update Holiday Template
+  type: http
+  seq: 4
+
+http:
+  method: PUT
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/holiday-templates/update/126
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "holidayTemplateId": 126,
+        "templateCode": "HTP00125",
+        "templateName": "Updated National Holidays 2026",
+        "description": "Updated description for holiday template",
+        "effectiveFrom": "2026-01-01",
+        "effectiveTo": "2026-12-31",
+        "optionModel": "ALLOWED",
+        "templateMode": "CUSTOM",
+        "isDefault": "N",
+        "isActive": "Y",
+        "templateStatus": "DRAFT",
+        "remarks": "Updated via Bruno",
+        "holidays": [
+          {
+            "holidayName": "Republic Day",
+            "occasion": "National Holiday",
+            "holidayDate": "2026-01-26",
+            "optionModel": "ALLOWED",
+            "isOptional": "N",
+            "isHalfDay": "N",
+            "remarks": "Republic Day"
+          }
+        ],
+        "assignments": [
+          {
+            "employeeId": 4261,
+            "effectiveFrom": "2026-01-01",
+            "effectiveTo": "2026-12-31",
+            "isActive": "Y"
+          }
+        ]
+      }
+  auth:
+    type: bearer
+    token: "{{authToken}}"
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        console.log("Status:", res.getStatus());
+        console.log("Response:", JSON.stringify(res.getBody(), null, 2));
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

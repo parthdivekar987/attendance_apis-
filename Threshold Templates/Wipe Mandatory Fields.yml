@@ -1,0 +1,49 @@
+﻿info:
+  name: Wipe Mandatory Fields
+  type: http
+  seq: 16
+
+http:
+  method: PUT
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/status-threshold/update/80
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "thresholdId": 80,
+        "thresholdCode": null,
+        "thresholdName": null,
+        "description": null,
+        "templateMode": null,
+        "shiftTypeApplicability": null,
+        "absentMaxHours": null,
+        "halfDayMinHours": null,
+        "fullDayMinHours": null,
+        "presentMinHours": null,
+        "effectiveFrom": null,
+        "effectiveTo": null,
+        "isDefault": null,
+        "isActive": null,
+        "templateStatus": null,
+        "remarks": null,
+        "assignments": []
+      }
+  auth:
+    type: bearer
+    token: "{{authToken}}"
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        console.log("Status:", res.getStatus());
+        console.log("Response:", JSON.stringify(res.getBody(), null, 2));
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

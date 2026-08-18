@@ -1,0 +1,55 @@
+﻿info:
+  name: Extreme Boundary Hours
+  type: http
+  seq: 4
+
+http:
+  method: POST
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/status-threshold/create
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "thresholdCode": "TH_BOUNDARY_01",
+        "thresholdName": "Extreme Boundary Hours Test",
+        "description": "Testing values exceeding 24 hours boundary",
+        "templateMode": "CUSTOM",
+        "shiftTypeApplicability": "Fixed",
+        "absentMaxHours": 25.00,
+        "halfDayMinHours": 30.00,
+        "fullDayMinHours": 40.00,
+        "presentMinHours": 50.00,
+        "effectiveFrom": "2027-01-01",
+        "effectiveTo": "2027-12-31",
+        "isDefault": "N",
+        "isActive": "Y",
+        "templateStatus": "DRAFT",
+        "remarks": "Extreme hour limit boundary test",
+        "assignments": [
+          {
+            "employeeId": 34,
+            "effectiveFrom": "2027-01-01",
+            "effectiveTo": "2027-12-31",
+            "isActive": "Y"
+          }
+        ]
+      }
+  auth:
+    type: bearer
+    token: "{{authToken}}"
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        console.log("Status:", res.getStatus());
+        console.log("Response:", JSON.stringify(res.getBody(), null, 2));
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
