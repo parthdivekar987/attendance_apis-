@@ -1,4 +1,4 @@
-﻿info:
+info:
   name: BOLA - ID mismatch mutation
   type: http
   seq: 15
@@ -11,7 +11,7 @@ http:
       value: application/json
   body:
     type: json
-    data: |-
+    data: |
       {
         "thresholdId": 9999,
         "thresholdCode": "TH00079",
