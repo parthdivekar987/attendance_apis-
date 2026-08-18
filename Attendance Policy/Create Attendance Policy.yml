@@ -1,0 +1,15 @@
+info:
+  name: Create Attendance Policy
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendancepolicy
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

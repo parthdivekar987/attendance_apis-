@@ -1,0 +1,19 @@
+info:
+  name: "Update the attendance policy "
+  type: http
+  seq: 5
+
+http:
+  method: PATCH
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendancepolicy/20/status?action=DEACTIVATE
+  params:
+    - name: action
+      value: DEACTIVATE
+      type: query
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

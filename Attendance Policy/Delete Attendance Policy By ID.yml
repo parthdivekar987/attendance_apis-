@@ -1,0 +1,15 @@
+info:
+  name: " Delete Attendance Policy By ID"
+  type: http
+  seq: 6
+
+http:
+  method: DELETE
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendancepolicy/22
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

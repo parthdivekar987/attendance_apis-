@@ -1,0 +1,15 @@
+info:
+  name: " Mutation on Non-Existent Entity ID"
+  type: http
+  seq: 10
+
+http:
+  method: PUT
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendancepolicy/999999
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

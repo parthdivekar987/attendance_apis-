@@ -1,0 +1,19 @@
+info:
+  name: Action Enum Tampering Fuzzing Test
+  type: http
+  seq: 9
+
+http:
+  method: PATCH
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendancepolicy/20/status?action=TAMPERED_ACTION_PROBE
+  params:
+    - name: action
+      value: TAMPERED_ACTION_PROBE
+      type: query
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
