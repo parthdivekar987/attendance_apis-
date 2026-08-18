@@ -1,9 +1,9 @@
-﻿1. Bug Title: Unhandled 500 Internal Server Error & Entity Leak on Invalid Sort Query Parameter
+﻿Bug Title 1: Unhandled 500 Internal Server Error & Entity Leak on Invalid Sort Query Parameter
 
 method - GET 
 url - https://uatmcdphcmplatform.omfysgroup.com/api/attendance/status-threshold/getAll?page=0&size=10&sort=non_existent_column,desc
 
-response:
+Actual Response (HTTP 500 Internal Server Error):
 {
   "status": "error",
   "errorCode": "500",
@@ -11,12 +11,21 @@ response:
   "timestamp": "17-Aug-2026 T16:21:09"
 }
 
+Expected Response (HTTP 400 Bad Request):
+{
+  "status": "error",
+  "errorCode": "400",
+  "message": "Invalid sort property: 'non_existent_column'",
+  "timestamp": "17-Aug-2026 T16:21:09"
+}
 
 
-BUG Title 2: Missing Input Validation for Special-Character-Only Values in Threshold Name
+
+Bug Title 2: Missing Input Validation for Special-Character-Only Values in Threshold Name (Accepted quotes-only Name)
 
 method - POST 
 url - https://uatmcdphcmplatform.omfysgroup.com/api/attendance/status-threshold/create
+
 Request:
 {
   "thresholdCode": "TH_QUOTES_TEST",
@@ -40,7 +49,7 @@ Request:
   ]
 }
 
-Response:
+Actual Response (HTTP 201 Created - Unexpected Success):
 {
   "status": "success",
   "message": "Attendance Status Threshold created successfully.",
@@ -53,6 +62,13 @@ Response:
   "timestamp": "17-Aug-2026 T15:26:00"
 }
 
+Expected Response (HTTP 400 Bad Request):
+{
+  "status": "error",
+  "errorCode": "VALIDATION_ERROR",
+  "message": "thresholdName must contain valid alphanumeric characters and cannot consist solely of quotes or whitespace."
+}
+
 
 
 Bug Title 3: Missing Chronological Date Order Validation on Week Off Employee Assignments (Inverted Dates)
@@ -60,7 +76,7 @@ Bug Title 3: Missing Chronological Date Order Validation on Week Off Employee As
 method - POST 
 url - https://uatmcdphcmplatform.omfysgroup.com/api/attendance/week-offs/create
 
-request:
+Request:
 {
   "weekOffName": "Bug Test Inverted Dates Policy 02",
   "description": "Testing inverted chronological date validation",
@@ -86,7 +102,7 @@ request:
   ]
 }
 
-Response:
+Actual Response (HTTP 201 Created - Unexpected Success):
 {
   "status": "success",
   "message": "Week Off Template created successfully.",
@@ -97,6 +113,13 @@ Response:
     "isActive": "Y"
   },
   "timestamp": "17-Aug-2026 T16:42:16"
+}
+
+Expected Response (HTTP 400 Bad Request):
+{
+  "status": "error",
+  "errorCode": "400",
+  "message": "Effective To date (2029-01-01) cannot be before Effective From date (2029-12-31)."
 }
 
 
@@ -139,7 +162,7 @@ Request:
   ]
 }
 
-Response:
+Actual Response (HTTP 201 Created - Unexpected Success):
 {
   "status": "success",
   "message": "Attendance Status Threshold created successfully.",
@@ -154,6 +177,13 @@ Response:
     ]
   },
   "timestamp": "17-Aug-2026 T18:15:43"
+}
+
+Expected Response (HTTP 400 Bad Request):
+{
+  "status": "error",
+  "errorCode": "400",
+  "message": "Duplicate employee assignment found for Employee ID: 3701."
 }
 
 
@@ -190,7 +220,7 @@ Request:
   ]
 }
 
-Response:
+Actual Response (HTTP 201 Created - Unexpected Success):
 {
   "status": "success",
   "message": "Attendance Status Threshold created successfully.",
@@ -206,6 +236,15 @@ Response:
   },
   "timestamp": "18-Aug-2026 T13:18:38"
 }
+
+Expected Response (HTTP 400 Bad Request):
+{
+  "status": "error",
+  "errorCode": "VALIDATION_ERROR",
+  "message": "Working threshold hours cannot exceed 24.00 hours per day (presentMinHours: 50.00 is invalid)."
+}
+
+
 
 Bug Title 6: Missing Input Validation for Special-Character-Only Values in Late/Early Policy Name (Accepted quotes-only Name)
 
@@ -239,7 +278,7 @@ Request:
   ]
 }
 
-Response:
+Actual Response (HTTP 201 Created - Unexpected Success):
 {
   "status": "success",
   "message": "Late/Early Policy created successfully.",
@@ -268,13 +307,21 @@ Response:
   "timestamp": "18-Aug-2026 T14:51:00"
 }
 
+Expected Response (HTTP 400 Bad Request):
+{
+  "status": "error",
+  "errorCode": "VALIDATION_ERROR",
+  "message": "Policy name must contain valid alphanumeric characters."
+}
+
+
 
 Bug Title 7: Unhandled 500 Internal Server Error & JPA Entity Leak on Invalid Sort Query Parameter in Late/Early Policy
 
 method - GET 
 url - https://uatmcdphcmplatform.omfysgroup.com/api/attendance/late-early-policies/getAll?page=0&size=10&sort=non_existent_column,desc
 
-Actual Response:
+Actual Response (HTTP 500 Internal Server Error):
 {
   "status": "error",
   "errorCode": "500",
@@ -282,7 +329,7 @@ Actual Response:
   "timestamp": "18-Aug-2026 T14:59:09"
 }
 
-Expected Response:
+Expected Response (HTTP 400 Bad Request):
 {
   "status": "error",
   "errorCode": "400",

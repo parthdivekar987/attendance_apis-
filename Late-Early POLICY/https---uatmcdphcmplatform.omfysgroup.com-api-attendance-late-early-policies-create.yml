@@ -1,0 +1,19 @@
+info:
+  name: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/late-early-policies/create
+  type: http
+  seq: 15
+
+http:
+  method: PATCH
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/late-early-policies/138/status?status=N
+  params:
+    - name: status
+      value: N
+      type: query
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

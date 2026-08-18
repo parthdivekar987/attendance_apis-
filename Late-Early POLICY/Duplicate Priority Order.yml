@@ -1,0 +1,15 @@
+info:
+  name: Duplicate Priority Order
+  type: http
+  seq: 8
+
+http:
+  method: POST
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/late-early-policies/create
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
