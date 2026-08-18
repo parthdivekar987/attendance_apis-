@@ -1,0 +1,15 @@
+﻿meta {
+  name: 6. Toggle Shift Status (Activate - Deactivate)
+  type: http
+  seq: 7
+}
+
+patch {
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/v1/attendance/shift/master/status/61?action=DEACTIVATE
+  body: none
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{authToken}}
+}
