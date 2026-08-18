@@ -581,3 +581,94 @@ In `AttendanceStatusThresholdRequestDTO.java`, add maximum 24.00 hours constrain
 @DecimalMax(value = "24.00", message = "Hours cannot exceed 24.00 hours per day")
 private BigDecimal presentMinHours;
 ```
+
+---
+
+## ðŸž BUG 6: Missing Input Validation for Special-Character-Only Values in Policy Name (Accepted Quotes-Only Name)
+
+* **Defect ID:** `BUG-HCM-ATT-006`
+* **Module:** Late / Early Policy Master
+* **HTTP Method:** `POST`
+* **Request URL:** `https://uatmcdphcmplatform.omfysgroup.com/api/attendance/late-early-policies/create`
+* **Request Headers:**
+  ```http
+  Authorization: Bearer {{authToken}}
+  Content-Type: application/json
+  ```
+
+### ðŸ“¤ Actual Request Body (JSON):
+```json
+{
+  "policyCode": null,
+  "policyName": "\"\"\"\"\"\"",
+  "description": "Testing quotes-only policy name fuzzing acceptance",
+  "templateMode": "CUSTOM",
+  "eventCountMinutes": 30,
+  "graceMinutes": 10,
+  "graceEvent": 2,
+  "allowedEvent": 3,
+  "deductionType": "LEAVE",
+  "leaveDeductDays": 0.50,
+  "leaveTypeId": 1,
+  "effectiveFrom": "2027-01-01",
+  "effectiveTo": "2027-12-31",
+  "isDefault": "N",
+  "isActive": "Y",
+  "assignments": [
+    {
+      "employeeId": 3503,
+      "effectiveFrom": "2027-01-01",
+      "effectiveTo": "2027-12-31",
+      "isActive": "Y"
+    }
+  ]
+}
+```
+
+### âŒ Actual Response Received (HTTP 201 Created â€” Unexpected Success):
+```json
+{
+  "status": "success",
+  "message": "Late/Early Policy created successfully.",
+  "data": {
+    "policyId": 154,
+    "policyCode": "LEP00153",
+    "policyName": "\"\"\"\"\"\"",
+    "description": "Testing quotes-only policy name fuzzing acceptance",
+    "templateMode": "CUSTOM",
+    "eventCountMinutes": 30,
+    "graceMinutes": 10,
+    "graceEvent": 2,
+    "allowedEvent": 3,
+    "deductionType": "LEAVE",
+    "leaveDeductDays": 0.50,
+    "leaveTypeId": 1,
+    "leaveTypeName": "CL",
+    "effectiveFrom": "2027-01-01T00:00:00.000+00:00",
+    "effectiveTo": "2027-12-31T00:00:00.000+00:00",
+    "isDefault": "N",
+    "isActive": "Y"
+  },
+  "timestamp": "18-Aug-2026 T14:51:00"
+}
+```
+
+### âœ”ï¸ Expected Response (HTTP 400 Bad Request):
+```json
+{
+  "status": "error",
+  "errorCode": "VALIDATION_ERROR",
+  "message": "Policy name must contain valid alphanumeric characters."
+}
+```
+
+### ðŸ”§ Developer Fix:
+In `LateEarlyPolicyRequestDto.java`, add `@NotBlank` and regex pattern constraint validation on `policyName`:
+```java
+@NotBlank(message = "Policy Name is required")
+@Pattern(
+    regexp = "^(?=.*[a-zA-Z0-9])[a-zA-Z0-9\\s\\-_/().]+$", 
+    message = "Policy Name must contain alphanumeric characters and cannot consist solely of whitespace or special symbols"
+)
+private String policyName;
+```
