@@ -1,0 +1,15 @@
+﻿meta {
+  name: 3. Get Attendance Policy By ID
+  type: http
+  seq: 4
+}
+
+get {
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendancepolicy/22
+  body: none
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{authToken}}
+}

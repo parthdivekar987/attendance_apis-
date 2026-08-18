@@ -1,0 +1,24 @@
+﻿meta {
+  name: Login (Auth Token)
+  type: http
+  seq: 1
+}
+
+post {
+  url: https://uat-mcdp-be.omfysgroup.com/auth/token
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "empCode": "OMI-0076",
+    "password": "Omfys@123"
+  }
+}
+
+script:post-response {
+  if (res.body && res.body.token) {
+    bru.setEnvVar("authToken", res.body.token);
+  }
+}
