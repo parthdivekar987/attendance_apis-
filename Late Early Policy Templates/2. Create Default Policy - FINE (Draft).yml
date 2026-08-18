@@ -1,0 +1,51 @@
+﻿info:
+  name: 2. Create Default Policy - FINE (Draft)
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/late-early-policies/create
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "policyCode": null,
+        "policyName": "Draft Default Late Early Policy 2027",
+        "description": "Default organization policy created in inactive draft state",
+        "templateMode": "DEFAULT",
+        "eventCountMinutes": 15,
+        "graceMinutes": 5,
+        "graceEvent": 3,
+        "allowedEvent": 3,
+        "deductionType": "FINE",
+        "leaveDeductDays": null,
+        "leaveTypeId": null,
+        "fineAmount": 100.00,
+        "effectiveFrom": "2027-01-01",
+        "effectiveTo": "2027-12-31",
+        "isDefault": "Y",
+        "isActive": "N",
+        "remarks": "Inactive default template",
+        "deductionPriorities": [],
+        "assignments": []
+      }
+  auth:
+    type: bearer
+    token: "{{authToken}}"
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        console.log("Status:", res.getStatus());
+        console.log("Response:", JSON.stringify(res.getBody(), null, 2));
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

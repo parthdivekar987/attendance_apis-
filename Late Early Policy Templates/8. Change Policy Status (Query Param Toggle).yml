@@ -1,0 +1,24 @@
+﻿info:
+  name: 8. Change Policy Status (Query Param Toggle)
+  type: http
+  seq: 9
+
+http:
+  method: PATCH
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/late-early-policies/138/status?status=N
+  auth:
+    type: bearer
+    token: "{{authToken}}"
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        console.log("Status:", res.getStatus());
+        console.log("Response:", JSON.stringify(res.getBody(), null, 2));
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
