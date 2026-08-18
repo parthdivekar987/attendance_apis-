@@ -798,3 +798,108 @@ lateEarlyPolicyRepository.save(policy);
 assignmentRepository.updateStatusByPolicyId(policyId, status);
 deductionPriorityRepository.updateStatusByPolicyId(policyId, status);
 ```
+
+---
+
+## ðŸž BUG 9: Missing Foreign Active-State Validation on Leave Type Allows Creation of Corrupted Policies Linked to Deactivated Leaves
+
+* **Defect ID:** `BUG-HCM-ATT-009`
+* **Module:** Late / Early Policy Master
+* **HTTP Method:** `POST`
+* **Request URL:** `https://uatmcdphcmplatform.omfysgroup.com/api/attendance/late-early-policies/create`
+* **Request Headers:**
+  ```http
+  Authorization: Bearer {{authToken}}
+  Content-Type: application/json
+  ```
+
+### ðŸ§­ UI Navigation Path to Observe Corrupted State:
+1. Navigate to **Attendance Management** $\rightarrow$ **Late / Early Policy** list table.
+2. In the search box, search for Template Code: **`LEP00175`** (or `Deactivated Leave Gating Test 2038`).
+3. Click the **Edit (âœï¸ icon)** button to open the *Edit Late/Early Policy Template* modal.
+4. Observe the **"Leave Type for Deduction *"** field: It renders completely **BLANK (`Select leave type`)** because the frontend dropdown hides inactive leaves (`OD`), failing to bind the backend's `leaveTypeId: 7`.
+5. Attempting to click **"Update"** blocks the user with a mandatory field error, making the policy permanently un-editable from the web UI.
+
+### ðŸ“‹ Technical & Architectural Root Cause:
+In the Leave Master API (`/admin/leaves/getleavestypes`), Leave Type ID 7 (`OD`) has `is_active = "N"`. However, the Late/Early Policy creation endpoint only verifies if `leaveTypeId` exists in the database table and fails to check if `is_active == 'Y'`. Consequently, the API allows creating an active policy bound to a disabled leave type, desynchronizing the frontend dropdown and crashing payroll deduction cron jobs.
+
+### ðŸ“¤ Actual Request Body (JSON):
+```json
+{
+  "policyCode": null,
+  "policyName": "Deactivated Leave Gating Test 2038",
+  "description": "Testing foreign active-state gating on leaveTypeId: 7 (OD)",
+  "templateMode": "CUSTOM",
+  "eventCountMinutes": 30,
+  "graceMinutes": 10,
+  "graceEvent": 2,
+  "allowedEvent": 3,
+  "deductionType": "LEAVE",
+  "leaveDeductDays": 0.50,
+  "leaveTypeId": 7,
+  "effectiveFrom": "2038-01-01",
+  "effectiveTo": "2038-12-31",
+  "isDefault": "N",
+  "isActive": "Y",
+  "assignments": [
+    {
+      "employeeId": 4223,
+      "effectiveFrom": "2038-01-01",
+      "effectiveTo": "2038-12-31",
+      "isActive": "Y"
+    }
+  ]
+}
+```
+
+### âŒ Actual Response Received (HTTP 201 Created â€” Unexpected Success):
+```json
+{
+  "status": "success",
+  "message": "Late/Early Policy created successfully.",
+  "data": {
+    "policyId": 175,
+    "policyCode": "LEP00175",
+    "policyName": "Deactivated Leave Gating Test 2038",
+    "description": "Testing foreign active-state gating on leaveTypeId: 7 (OD)",
+    "templateMode": "CUSTOM",
+    "templateStatus": null,
+    "eventCountMinutes": 30,
+    "graceMinutes": 10,
+    "graceEvent": 2,
+    "allowedEvent": 3,
+    "deductionType": "LEAVE",
+    "leaveDeductDays": 0.50,
+    "leaveTypeId": 7,
+    "leaveTypeCode": null,
+    "leaveTypeName": "OD",
+    "fineAmount": null,
+    "effectiveFrom": "2038-01-01T00:00:00.000+00:00",
+    "effectiveTo": "2038-12-31T00:00:00.000+00:00",
+    "isDefault": "N",
+    "isActive": "Y"
+  },
+  "timestamp": "18-Aug-2026 T15:54:04"
+}
+```
+
+### âœ”ï¸ Expected Response (HTTP 400 Bad Request):
+```json
+{
+  "status": "error",
+  "errorCode": "400",
+  "message": "Leave Type 'OD' (ID 7) is deactivated and cannot be selected for late/early deduction rules.",
+  "timestamp": "18-Aug-2026 T15:54:04"
+}
+```
+
+### ðŸ”§ Developer Fix:
+In `LateEarlyPolicyServiceImpl.java`:
+```java
+LeaveTypeMaster leaveType = leaveTypeRepository.findById(requestDto.getLeaveTypeId())
+    .orElseThrow(() -> new ResourceNotFoundException("Leave Type not found"));
+
+if (!"Y".equalsIgnoreCase(leaveType.getIsActive())) {
+    throw new BadRequestException("Leave Type '" + leaveType.getLeaveTypeName() + "' is inactive and cannot be assigned.");
+}
+```

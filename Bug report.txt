@@ -387,3 +387,83 @@ Expected Response (HTTP 200 OK - Cascaded Deactivation to Child Assignments):
   },
   "timestamp": "18-Aug-2026 T15:38:12"
 }
+
+
+Bug Title 9: Missing Foreign Active-State Validation on Leave Type Allows Creation of Corrupted Policies Linked to Deactivated Leaves (UI Rendering & Update Failure)
+
+method - POST 
+url - https://uatmcdphcmplatform.omfysgroup.com/api/attendance/late-early-policies/create
+
+UI Navigation Path:
+1. Go to Attendance Management -> Late / Early Policy list table.
+2. Search for Template Code 'LEP00175' (or 'Deactivated Leave Gating Test 2038').
+3. Click on the Edit (pencil icon) button to open the 'Edit Late/Early Policy Template' modal.
+4. Observe the 'Leave Type for Deduction *' field: It renders as BLANK ('Select leave type') because the frontend dropdown hides inactive leaves (OD), failing to bind the backend's leaveTypeId: 7.
+5. Attempting to click 'Update' blocks the user with a mandatory field validation error, rendering the policy permanently un-editable from the UI.
+
+Explanation:
+In the Leave Master API (/admin/leaves/getleavestypes), Leave Type ID 7 ('OD') is marked as deactivated (is_active = 'N'). However, the Late/Early Policy creation endpoint only verifies if leaveTypeId exists in the database table and fails to check if is_active == 'Y'. Consequently, the API allows creating an active attendance policy bound to a disabled leave type. When HR opens this template in the UI, the frontend dropdown fails to match the disabled leave type and displays blank, causing corrupted state and blocking updates.
+
+Request:
+{
+  "policyCode": null,
+  "policyName": "Deactivated Leave Gating Test 2038",
+  "description": "Testing foreign active-state gating on leaveTypeId: 7 (OD)",
+  "templateMode": "CUSTOM",
+  "eventCountMinutes": 30,
+  "graceMinutes": 10,
+  "graceEvent": 2,
+  "allowedEvent": 3,
+  "deductionType": "LEAVE",
+  "leaveDeductDays": 0.50,
+  "leaveTypeId": 7,
+  "effectiveFrom": "2038-01-01",
+  "effectiveTo": "2038-12-31",
+  "isDefault": "N",
+  "isActive": "Y",
+  "assignments": [
+    {
+      "employeeId": 4223,
+      "effectiveFrom": "2038-01-01",
+      "effectiveTo": "2038-12-31",
+      "isActive": "Y"
+    }
+  ]
+}
+
+Actual Response (HTTP 201 Created - Unexpected Success):
+{
+  "status": "success",
+  "message": "Late/Early Policy created successfully.",
+  "data": {
+    "policyId": 175,
+    "policyCode": "LEP00175",
+    "policyName": "Deactivated Leave Gating Test 2038",
+    "description": "Testing foreign active-state gating on leaveTypeId: 7 (OD)",
+    "templateMode": "CUSTOM",
+    "templateStatus": null,
+    "eventCountMinutes": 30,
+    "graceMinutes": 10,
+    "graceEvent": 2,
+    "allowedEvent": 3,
+    "deductionType": "LEAVE",
+    "leaveDeductDays": 0.50,
+    "leaveTypeId": 7,
+    "leaveTypeCode": null,
+    "leaveTypeName": "OD",
+    "fineAmount": null,
+    "effectiveFrom": "2038-01-01T00:00:00.000+00:00",
+    "effectiveTo": "2038-12-31T00:00:00.000+00:00",
+    "isDefault": "N",
+    "isActive": "Y"
+  },
+  "timestamp": "18-Aug-2026 T15:54:04"
+}
+
+Expected Response (HTTP 400 Bad Request):
+{
+  "status": "error",
+  "errorCode": "400",
+  "message": "Leave Type 'OD' (ID 7) is deactivated and cannot be selected for late/early deduction rules.",
+  "timestamp": "18-Aug-2026 T15:54:04"
+}
