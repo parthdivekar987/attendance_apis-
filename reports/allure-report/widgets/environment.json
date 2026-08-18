@@ -1,1 +1,38 @@
-[{"values":["uat"],"name":"API_TEST_ENV"},{"values":["https://dev_mcdp_be.omfysgroup.com"],"name":"AUTH_BASE_URL"},{"values":["https://devmcdphcmplatform.omfysgroup.com"],"name":"LEAVE_BASE_URL"}]
+﻿[
+    {
+        "name":  "Application",
+        "values":  [
+                       "HCM Attendance Management Platform"
+                   ]
+    },
+    {
+        "name":  "Target Environment",
+        "values":  [
+                       "UAT (https://uatmcdphcmplatform.omfysgroup.com)"
+                   ]
+    },
+    {
+        "name":  "Total Modules Tested",
+        "values":  [
+                       "6 Masters (Threshold, WeekOff, Holiday, Late/Early, Attendance Policy, Shift)"
+                   ]
+    },
+    {
+        "name":  "Defects Logged",
+        "values":  [
+                       "9 Confirmed Defects (BUG-HCM-ATT-001 to 009)"
+                   ]
+    },
+    {
+        "name":  "Auth Profile",
+        "values":  [
+                       "Sachin Khutwad (OMI-0076 / Admin)"
+                   ]
+    },
+    {
+        "name":  "Execution Engine",
+        "values":  [
+                       "Bruno Automated API Runner v4.0"
+                   ]
+    }
+]

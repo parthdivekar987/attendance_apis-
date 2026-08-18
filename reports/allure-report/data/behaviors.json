@@ -1,6 +1,6 @@
 ﻿{
-    "name":  "suites",
-    "uid":  "all_suites_root",
+    "name":  "behaviors",
+    "uid":  "b1",
     "children":  [
                      {
                          "name":  "Late / Early Policy Master",

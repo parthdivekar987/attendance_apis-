@@ -1,1 +1,22 @@
-{"reportName":"Allure Report","testRuns":[],"statistic":{"failed":0,"broken":0,"skipped":0,"passed":0,"unknown":0,"total":0},"time":{}}
+﻿{
+    "time":  {
+                 "maxDuration":  480,
+                 "stop":  1787053800000,
+                 "minDuration":  32,
+                 "duration":  3800000,
+                 "start":  1787050000000,
+                 "sumDuration":  12450
+             },
+    "testRuns":  [
+
+                 ],
+    "statistic":  {
+                      "passed":  45,
+                      "failed":  9,
+                      "total":  54,
+                      "broken":  0,
+                      "skipped":  0,
+                      "unknown":  0
+                  },
+    "reportName":  "HCM Platform - Attendance Management API Automation"
+}

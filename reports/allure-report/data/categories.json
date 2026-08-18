@@ -1,5 +1,48 @@
-{
-  "uid": "4b4757e66a1912dae1a509f688f20b0f",
-  "name": "categories",
-  "children": []
+﻿{
+    "items":  [
+                  {
+                      "matchedStatuses":  [
+                                              "failed"
+                                          ],
+                      "name":  "Product Defects \u0026 Schema Validation Failures",
+                      "children":  [
+                                       {
+                                           "name":  "BUG-HCM-ATT-001: Unhandled 500 Entity Leak on Threshold Sort",
+                                           "status":  "failed"
+                                       },
+                                       {
+                                           "name":  "BUG-HCM-ATT-002: Quotes-only Name Acceptance in Threshold Master",
+                                           "status":  "failed"
+                                       },
+                                       {
+                                           "name":  "BUG-HCM-ATT-003: Inverted Date Order in Week-Off Assignments",
+                                           "status":  "failed"
+                                       },
+                                       {
+                                           "name":  "BUG-HCM-ATT-004: Duplicate Employee Fan-Out in Threshold Master",
+                                           "status":  "failed"
+                                       },
+                                       {
+                                           "name":  "BUG-HCM-ATT-005: 50.00h Working Hours Boundary Overflow",
+                                           "status":  "failed"
+                                       },
+                                       {
+                                           "name":  "BUG-HCM-ATT-006: Quotes-only Name Acceptance in Late/Early Policy",
+                                           "status":  "failed"
+                                       },
+                                       {
+                                           "name":  "BUG-HCM-ATT-007: Unhandled 500 Entity Leak on Late/Early Sort",
+                                           "status":  "failed"
+                                       },
+                                       {
+                                           "name":  "BUG-HCM-ATT-008: Status Deactivation Cascade Desynchronization",
+                                           "status":  "failed"
+                                       },
+                                       {
+                                           "name":  "BUG-HCM-ATT-009: Inactive Leave Type Gating \u0026 Broken UI State",
+                                           "status":  "failed"
+                                       }
+                                   ]
+                  }
+              ]
 }
