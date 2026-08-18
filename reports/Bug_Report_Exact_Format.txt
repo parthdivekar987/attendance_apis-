@@ -1,0 +1,208 @@
+﻿1. Bug Title: Unhandled 500 Internal Server Error & Entity Leak on Invalid Sort Query Parameter
+
+method - GET 
+url - https://uatmcdphcmplatform.omfysgroup.com/api/attendance/status-threshold/getAll?page=0&size=10&sort=non_existent_column,desc
+
+response:
+{
+  "status": "error",
+  "errorCode": "500",
+  "message": "No property 'non' found for type 'AttendanceStatusThresholdMaster'",
+  "timestamp": "17-Aug-2026 T16:21:09"
+}
+
+
+
+BUG Title 2: Missing Input Validation for Special-Character-Only Values in Threshold Name
+
+method - POST 
+url - https://uatmcdphcmplatform.omfysgroup.com/api/attendance/status-threshold/create
+Request:
+{
+  "thresholdCode": "TH_QUOTES_TEST",
+  "thresholdName": "\"\"\"\"",
+  "description": "Testing if name allows only double quote characters",
+  "templateMode": "CUSTOM",
+  "shiftTypeApplicability": "Fixed",
+  "absentMaxHours": 3.00,
+  "halfDayMinHours": 3.01,
+  "fullDayMinHours": 6.00,
+  "presentMinHours": 8.00,
+  "effectiveFrom": "2027-06-01",
+  "effectiveTo": "2027-12-31",
+  "isDefault": "N",
+  "isActive": "Y",
+  "templateStatus": "DRAFT",
+  "remarks": "Double quote string validation test",
+  "assignments": [
+    { "employeeId": 3964, "effectiveFrom": "2027-06-01", "effectiveTo": "2027-12-31", "isActive": "Y" },
+    { "employeeId": 3585, "effectiveFrom": "2027-06-01", "effectiveTo": "2027-12-31", "isActive": "Y" }
+  ]
+}
+
+Response:
+{
+  "status": "success",
+  "message": "Attendance Status Threshold created successfully.",
+  "data": {
+    "thresholdId": 80,
+    "thresholdCode": "TH00079",
+    "thresholdName": "\"\"\"\"",
+    "isActive": "Y"
+  },
+  "timestamp": "17-Aug-2026 T15:26:00"
+}
+
+
+
+Bug Title 3: Missing Chronological Date Order Validation on Week Off Employee Assignments (Inverted Dates)
+
+method - POST 
+url - https://uatmcdphcmplatform.omfysgroup.com/api/attendance/week-offs/create
+
+request:
+{
+  "weekOffName": "Bug Test Inverted Dates Policy 02",
+  "description": "Testing inverted chronological date validation",
+  "optionModel": "ALLOWED",
+  "isDefault": "N",
+  "isActive": "Y",
+  "details": [
+    {
+      "dayOfWeek": "SUNDAY",
+      "weekNo": 1,
+      "isWeekOff": "Y"
+    }
+  ],
+  "assignments": [
+    {
+      "employeeId": 3502,
+      "departmentId": 1,
+      "locationId": 1,
+      "effectiveFrom": "2029-12-31",
+      "effectiveTo": "2029-01-01",
+      "isActive": "Y"
+    }
+  ]
+}
+
+Response:
+{
+  "status": "success",
+  "message": "Week Off Template created successfully.",
+  "data": {
+    "weekOffId": 134,
+    "weekOffCode": "LEP00136",
+    "weekOffName": "Bug Test Inverted Dates Policy 02",
+    "isActive": "Y"
+  },
+  "timestamp": "17-Aug-2026 T16:42:16"
+}
+
+
+
+Bug Title 4: Missing Assignment De-Duplication Validation Allows Duplicate Employee Entries (Calculation Fan-Out Defect)
+
+method - POST 
+url - https://uatmcdphcmplatform.omfysgroup.com/api/attendance/status-threshold/create
+
+Request:
+{
+  "thresholdCode": "TH_DUP_REPRODUCE",
+  "thresholdName": "Duplicate Employee Test 2035",
+  "description": "Testing duplicate employee in same assignment payload",
+  "templateMode": "CUSTOM",
+  "shiftTypeApplicability": "Fixed",
+  "absentMaxHours": 3.00,
+  "halfDayMinHours": 3.01,
+  "fullDayMinHours": 6.00,
+  "presentMinHours": 8.00,
+  "effectiveFrom": "2035-01-01",
+  "effectiveTo": "2035-12-31",
+  "isDefault": "N",
+  "isActive": "Y",
+  "templateStatus": "DRAFT",
+  "remarks": "Testing duplicate employee bug",
+  "assignments": [
+    {
+      "employeeId": 3701,
+      "effectiveFrom": "2035-01-01",
+      "effectiveTo": "2035-12-31",
+      "isActive": "Y"
+    },
+    {
+      "employeeId": 3701,
+      "effectiveFrom": "2035-01-01",
+      "effectiveTo": "2035-12-31",
+      "isActive": "Y"
+    }
+  ]
+}
+
+Response:
+{
+  "status": "success",
+  "message": "Attendance Status Threshold created successfully.",
+  "data": {
+    "thresholdId": 96,
+    "thresholdCode": "TH00095",
+    "thresholdName": "Duplicate Employee Test 2035",
+    "isActive": "Y",
+    "assignments": [
+      { "assignmentId": 80, "employeeId": 3701, "employeeName": "Gautam Gehani" },
+      { "assignmentId": 79, "employeeId": 3701, "employeeName": "Gautam Gehani" }
+    ]
+  },
+  "timestamp": "17-Aug-2026 T18:15:43"
+}
+
+
+
+Bug Title 5: Missing 24-Hour Upper Bound Limit Validation on Threshold Working Hours (Accepted > 24 Hours: 50.00h)
+
+method - POST 
+url - https://uatmcdphcmplatform.omfysgroup.com/api/attendance/status-threshold/create
+
+Request:
+{
+  "thresholdCode": "TH_EXT_HRS_01",
+  "thresholdName": "Extreme Boundary Hours 2028",
+  "description": "Testing hours exceeding 24h limit",
+  "templateMode": "CUSTOM",
+  "shiftTypeApplicability": "Fixed",
+  "absentMaxHours": 25.00,
+  "halfDayMinHours": 30.00,
+  "fullDayMinHours": 40.00,
+  "presentMinHours": 50.00,
+  "effectiveFrom": "2028-01-01",
+  "effectiveTo": "2028-12-31",
+  "isDefault": "N",
+  "isActive": "Y",
+  "templateStatus": "DRAFT",
+  "remarks": "Extreme hours limit test",
+  "assignments": [
+    {
+      "employeeId": 34,
+      "effectiveFrom": "2028-01-01",
+      "effectiveTo": "2028-12-31",
+      "isActive": "Y"
+    }
+  ]
+}
+
+Response:
+{
+  "status": "success",
+  "message": "Attendance Status Threshold created successfully.",
+  "data": {
+    "thresholdId": 106,
+    "thresholdCode": "TH00105",
+    "thresholdName": "Extreme Boundary Hours 2028",
+    "absentMaxHours": 25.00,
+    "halfDayMinHours": 30.00,
+    "fullDayMinHours": 40.00,
+    "presentMinHours": 50.00,
+    "isActive": "Y"
+  },
+  "timestamp": "18-Aug-2026 T13:18:38"
+}
