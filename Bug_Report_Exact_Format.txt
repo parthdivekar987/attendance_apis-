@@ -1,0 +1,579 @@
+﻿================================================================================
+HCM PLATFORM - ATTENDANCE MANAGEMENT APIS DEFECT REPORT
+================================================================================
+Environment: UAT (https://uatmcdphcmplatform.omfysgroup.com)
+Test Date: 19-Aug-2026
+Total Documented Defects: 11 Bugs
+Segregated by: Master API Modules
+
+SUMMARY BY API MODULE:
+  1. Status Threshold Master APIS (/api/attendance/status-threshold)   -> 4 Bugs (BUG-001, BUG-002, BUG-004, BUG-005)
+  2. Late / Early Policy Master APIS (/api/attendance/late-early-policies) -> 4 Bugs (BUG-006, BUG-007, BUG-008, BUG-009)
+  3. Week-Off Policy Master APIS (/api/attendance/week-offs)           -> 2 Bugs (BUG-003, BUG-011)
+  4. Attendance Shift Master APIS (/api/v1/attendance/shift/master)   -> 1 Bug  (BUG-010)
+================================================================================
+
+
+################################################################################
+SECTION 1: STATUS THRESHOLD MASTER APIS
+Base URL: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/status-threshold
+################################################################################
+
+--------------------------------------------------------------------------------
+BUG-HCM-ATT-001: Unhandled 500 Internal Server Error & JPA Entity Leak on Invalid Sort Property
+--------------------------------------------------------------------------------
+API Module: Status Threshold Master
+API Endpoint: GET /api/attendance/status-threshold/getAll
+HTTP Method: GET
+UI Navigation Path: Attendance Management -> Status Threshold -> Threshold List Grid
+
+Technical & Business Root Cause Explanation:
+Passing an unmapped sort field to the `sort` query parameter triggers Spring Data JPA's `PropertyReferenceException`. The exception bubbles up unhandled, returning HTTP 500 and exposing the internal JPA entity class `AttendanceStatusThresholdMaster` to the client. This violates secure error-handling guidelines (CWE-209).
+
+Request Parameters:
+?page=0&size=10&sort=non_existent_column,desc
+
+Actual Response:
+Status: 500 Internal Server Error
+Body:
+{
+  "status": "error",
+  "errorCode": "500",
+  "message": "No property 'non' found for type 'AttendanceStatusThresholdMaster'",
+  "timestamp": "17-Aug-2026 T14:15:30"
+}
+
+Expected Response:
+Status: 400 Bad Request
+Body:
+{
+  "status": "error",
+  "errorCode": "INVALID_SORT_PROPERTY",
+  "message": "Invalid sort property 'non_existent_column'. Allowed fields: ['thresholdId', 'thresholdCode', 'thresholdName', 'templateMode', 'effectiveFrom', 'effectiveTo']",
+  "timestamp": "17-Aug-2026 T14:15:30"
+}
+
+Developer Fix Recommendation:
+Implement an `@ExceptionHandler(PropertyReferenceException.class)` in the global exception handler or validate the `sort` parameter against a whitelist of entity property names before passing to the repository.
+
+
+--------------------------------------------------------------------------------
+BUG-HCM-ATT-002: Accepted Quotes-Only Threshold Name ("""") Bypass Validation
+--------------------------------------------------------------------------------
+API Module: Status Threshold Master
+API Endpoint: POST /api/attendance/status-threshold/create
+HTTP Method: POST
+UI Navigation Path: Attendance Management -> Status Threshold -> Create Template -> Threshold Name Input
+
+Technical & Business Root Cause Explanation:
+The backend validation fails to sanitize or trim escaped quote characters (`""""`). As a result, meaningless strings consisting solely of quotation marks bypass validation and create active threshold records in the database with HTTP 201 Created.
+
+Request Body:
+{
+  "thresholdCode": "TH_Q",
+  "thresholdName": "\"\"\"\"",
+  "description": "Quotes fuzzing test",
+  "templateMode": "CUSTOM",
+  "shiftTypeApplicability": "Fixed",
+  "absentMaxHours": 3.0,
+  "halfDayMinHours": 3.01,
+  "fullDayMinHours": 6.0,
+  "presentMinHours": 8.0,
+  "effectiveFrom": "2030-01-01",
+  "effectiveTo": "2030-12-31",
+  "isDefault": "N",
+  "isActive": "Y",
+  "templateStatus": "DRAFT",
+  "remarks": "Fuzzing test",
+  "assignments": [
+    {
+      "employeeId": 34,
+      "effectiveFrom": "2030-01-01",
+      "effectiveTo": "2030-12-31",
+      "isActive": "Y"
+    }
+  ]
+}
+
+Actual Response:
+Status: 201 Created
+Body:
+{
+  "status": "success",
+  "message": "Status Threshold created successfully",
+  "data": { "thresholdId": 82 }
+}
+
+Expected Response:
+Status: 400 Bad Request
+Body:
+{
+  "status": "error",
+  "errorCode": "VALIDATION_ERROR",
+  "message": "Threshold Name must contain valid alphanumeric characters and cannot consist solely of punctuation marks or quotes"
+}
+
+Developer Fix Recommendation:
+Apply regex validation (`@Pattern(regexp = "^[a-zA-Z0-9 ]*[a-zA-Z0-9]+[a-zA-Z0-9 ]*$")`) on `thresholdName` to ensure it contains printable alphanumeric characters.
+
+
+--------------------------------------------------------------------------------
+BUG-HCM-ATT-004: Duplicate Employee ID Fan-Out Collision in Roster Array
+--------------------------------------------------------------------------------
+API Module: Status Threshold Master
+API Endpoint: POST /api/attendance/status-threshold/create
+HTTP Method: POST
+UI Navigation Path: Attendance Management -> Status Threshold -> Create Template -> Employee Assignment Table
+
+Technical & Business Root Cause Explanation:
+The backend does not de-duplicate or validate uniqueness within the incoming `assignments` array payload. Passing multiple assignment objects with the same `employeeId` creates redundant database rows, resulting in race conditions and duplicate status calculation records during attendance processing.
+
+Request Body:
+{
+  "thresholdCode": "TH_DUP",
+  "thresholdName": "Duplicate Fanout Test",
+  "description": "Duplicate employee test",
+  "templateMode": "CUSTOM",
+  "shiftTypeApplicability": "Fixed",
+  "absentMaxHours": 3.0,
+  "halfDayMinHours": 3.01,
+  "fullDayMinHours": 6.0,
+  "presentMinHours": 8.0,
+  "effectiveFrom": "2031-01-01",
+  "effectiveTo": "2031-12-31",
+  "isDefault": "N",
+  "isActive": "Y",
+  "templateStatus": "DRAFT",
+  "remarks": "Test",
+  "assignments": [
+    { "employeeId": 3701, "effectiveFrom": "2031-01-01", "effectiveTo": "2031-12-31", "isActive": "Y" },
+    { "employeeId": 3701, "effectiveFrom": "2031-01-01", "effectiveTo": "2031-12-31", "isActive": "Y" }
+  ]
+}
+
+Actual Response:
+Status: 201 Created
+Body:
+{
+  "status": "success",
+  "message": "Status Threshold created successfully",
+  "data": { "thresholdId": 83 }
+}
+
+Expected Response:
+Status: 400 Bad Request
+Body:
+{
+  "status": "error",
+  "errorCode": "DUPLICATE_EMPLOYEE_ASSIGNMENT",
+  "message": "Employee 3701 is duplicated in the assignment roster payload"
+}
+
+Developer Fix Recommendation:
+Enforce unique employee ID validation in the service layer before saving:
+`Set<Long> uniqueIds = new HashSet<>(); assignments.forEach(a -> { if (!uniqueIds.add(a.getEmployeeId())) throw new BadRequestException("Duplicate employee in payload: " + a.getEmployeeId()); });`
+
+
+--------------------------------------------------------------------------------
+BUG-HCM-ATT-005: Extreme Working Hours Overflow (50.00h/day) Exceeds 24.00h Limit
+--------------------------------------------------------------------------------
+API Module: Status Threshold Master
+API Endpoint: POST /api/attendance/status-threshold/create
+HTTP Method: POST
+UI Navigation Path: Attendance Management -> Status Threshold -> Create Template -> Working Hours Limits
+
+Technical & Business Root Cause Explanation:
+The backend lacks upper-bound validation (`@DecimalMax("24.00")`) on daily working hours fields (`absentMaxHours`, `halfDayMinHours`, `fullDayMinHours`, `presentMinHours`). Values exceeding 24.00 hours per day (such as 50.00 hours) are accepted, breaking attendance calculation engines and database reporting.
+
+Request Body:
+{
+  "thresholdCode": "TH_50H",
+  "thresholdName": "Extreme Hours Test",
+  "description": "50h limit probe",
+  "templateMode": "CUSTOM",
+  "shiftTypeApplicability": "Fixed",
+  "absentMaxHours": 25.0,
+  "halfDayMinHours": 30.0,
+  "fullDayMinHours": 40.0,
+  "presentMinHours": 50.0,
+  "effectiveFrom": "2032-01-01",
+  "effectiveTo": "2032-12-31",
+  "isDefault": "N",
+  "isActive": "Y",
+  "templateStatus": "DRAFT",
+  "remarks": "Test",
+  "assignments": [
+    { "employeeId": 34, "effectiveFrom": "2032-01-01", "effectiveTo": "2032-12-31", "isActive": "Y" }
+  ]
+}
+
+Actual Response:
+Status: 201 Created
+Body:
+{
+  "status": "success",
+  "message": "Status Threshold created successfully",
+  "data": { "thresholdId": 84 }
+}
+
+Expected Response:
+Status: 400 Bad Request
+Body:
+{
+  "status": "error",
+  "errorCode": "INVALID_HOUR_LIMIT",
+  "message": "Working hours limits cannot exceed 24.00 hours in a single calendar day"
+}
+
+Developer Fix Recommendation:
+Add `@DecimalMax(value = "24.00", message = "Hours cannot exceed 24.00")` on `absentMaxHours`, `halfDayMinHours`, `fullDayMinHours`, and `presentMinHours` DTO properties.
+
+
+################################################################################
+SECTION 2: LATE / EARLY POLICY MASTER APIS
+Base URL: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/late-early-policies
+################################################################################
+
+--------------------------------------------------------------------------------
+BUG-HCM-ATT-006: Accepted Quotes-Only Policy Name ("""""") Bypass Validation
+--------------------------------------------------------------------------------
+API Module: Late / Early Policy Master
+API Endpoint: POST /api/attendance/late-early-policies/create
+HTTP Method: POST
+UI Navigation Path: Attendance Management -> Late Early Policy -> Create Template -> Policy Name Input
+
+Technical & Business Root Cause Explanation:
+The backend validation fails to sanitize or trim escaped quote characters (`""""""`). Strings consisting exclusively of double quotation marks are accepted and stored as active policies with HTTP 201 Created.
+
+Request Body:
+{
+  "policyCode": null,
+  "policyName": "\"\"\"\"\"\"",
+  "description": "Quotes fuzzing probe",
+  "templateMode": "CUSTOM",
+  "eventCountMinutes": 30,
+  "graceMinutes": 10,
+  "graceEvent": 2,
+  "allowedEvent": 3,
+  "deductionType": "LEAVE",
+  "leaveDeductDays": 0.50,
+  "leaveTypeId": 1,
+  "effectiveFrom": "2039-01-01",
+  "effectiveTo": "2039-12-31",
+  "isDefault": "N",
+  "isActive": "Y",
+  "assignments": [
+    { "employeeId": 4104, "effectiveFrom": "2039-01-01", "effectiveTo": "2039-12-31", "isActive": "Y" }
+  ]
+}
+
+Actual Response:
+Status: 201 Created
+Body:
+{
+  "status": "success",
+  "message": "Late/Early Policy created successfully",
+  "data": { "policyId": 140 }
+}
+
+Expected Response:
+Status: 400 Bad Request
+Body:
+{
+  "status": "error",
+  "errorCode": "VALIDATION_ERROR",
+  "message": "Policy Name must contain valid alphanumeric characters and cannot consist solely of punctuation marks or quotes"
+}
+
+Developer Fix Recommendation:
+Add regex `@Pattern(regexp = "^[a-zA-Z0-9 ]*[a-zA-Z0-9]+[a-zA-Z0-9 ]*$", message = "Policy name must contain valid alphanumeric characters")` on `policyName`.
+
+
+--------------------------------------------------------------------------------
+BUG-HCM-ATT-007: Unhandled 500 Internal Server Error & JPA Entity Leak on Invalid Sort Property
+--------------------------------------------------------------------------------
+API Module: Late / Early Policy Master
+API Endpoint: GET /api/attendance/late-early-policies/getAll
+HTTP Method: GET
+UI Navigation Path: Attendance Management -> Late Early Policy -> Policy List Grid
+
+Technical & Business Root Cause Explanation:
+Passing an unmapped sort field to the `sort` query parameter triggers Spring Data JPA's `PropertyReferenceException`. The exception bubbles up unhandled, returning HTTP 500 and exposing the internal JPA entity class `LateEarlyPolicyMaster`.
+
+Request Parameters:
+?page=0&size=10&sort=non_existent_column,desc
+
+Actual Response:
+Status: 500 Internal Server Error
+Body:
+{
+  "status": "error",
+  "errorCode": "500",
+  "message": "No property 'non' found for type 'LateEarlyPolicyMaster'",
+  "timestamp": "17-Aug-2026 T15:20:10"
+}
+
+Expected Response:
+Status: 400 Bad Request
+Body:
+{
+  "status": "error",
+  "errorCode": "INVALID_SORT_PROPERTY",
+  "message": "Invalid sort property 'non_existent_column'. Allowed fields: ['policyId', 'policyCode', 'policyName', 'templateMode', 'effectiveFrom', 'effectiveTo']",
+  "timestamp": "17-Aug-2026 T15:20:10"
+}
+
+Developer Fix Recommendation:
+Whitelist allowed sort columns in `Pageable` validation prior to database execution.
+
+
+--------------------------------------------------------------------------------
+BUG-HCM-ATT-008: Missing Status Deactivation Cascade to Child Employee Assignments (isActive Desync)
+--------------------------------------------------------------------------------
+API Module: Late / Early Policy Master
+API Endpoint: PATCH /api/attendance/late-early-policies/{id}/status and GET /getById/{id}
+HTTP Method: PATCH / GET
+UI Navigation Path: Attendance Management -> Late Early Policy -> Deactivate Template -> View Assigned Employees
+
+Technical & Business Root Cause Explanation:
+When a Late/Early Policy is deactivated (`isActive: "N"` on the header via `PATCH /138/status?status=N`), the backend does not cascade the status change to child records in `late_early_policy_assignments`. The child assignments remain `isActive: "Y"`, creating an inconsistent state where deactivated policies continue penalizing employees during attendance processing.
+
+Request Body / Parameters:
+GET /getById/138 after executing PATCH /138/status?status=N
+
+Actual Response:
+Status: 200 OK
+Body:
+{
+  "status": "success",
+  "data": {
+    "policyId": 138,
+    "isActive": "N",
+    "assignments": [
+      {
+        "assignmentId": 142,
+        "employeeId": 34,
+        "isActive": "Y"
+      }
+    ]
+  }
+}
+
+Expected Response:
+Status: 200 OK
+Body:
+{
+  "status": "success",
+  "data": {
+    "policyId": 138,
+    "isActive": "N",
+    "assignments": [
+      {
+        "assignmentId": 142,
+        "employeeId": 34,
+        "isActive": "N"
+      }
+    ]
+  }
+}
+
+Developer Fix Recommendation:
+In the status change service method, cascade the deactivation to child assignment entities:
+`assignmentRepository.updateIsActiveByPolicyId(policyId, status);`
+
+
+--------------------------------------------------------------------------------
+BUG-HCM-ATT-009: Deactivated Leave Type (OD ID 7) Linked, Causing Blank Dropdown in UI
+--------------------------------------------------------------------------------
+API Module: Late / Early Policy Master
+API Endpoint: POST /api/attendance/late-early-policies/create
+HTTP Method: POST
+UI Navigation Path: Attendance Management -> Late Early Policy -> Create Template -> Leave Type Dropdown
+
+Technical & Business Root Cause Explanation:
+The backend does not verify that the referenced `leaveTypeId` is currently active (`is_active = 'Y'`) in the Leave Master table before binding it to a Late/Early Policy. Binding inactive leave type 7 (`On Duty / OD`) creates a broken UI state where the frontend edit screen renders a blank `Select leave type` dropdown and rejects form updates.
+
+Request Body:
+{
+  "policyCode": null,
+  "policyName": "Deactivated OD Test 2040",
+  "description": "OD Gating Defect Test",
+  "templateMode": "CUSTOM",
+  "eventCountMinutes": 30,
+  "graceMinutes": 10,
+  "graceEvent": 2,
+  "allowedEvent": 3,
+  "deductionType": "LEAVE",
+  "leaveDeductDays": 0.50,
+  "leaveTypeId": 7,
+  "effectiveFrom": "2040-01-01",
+  "effectiveTo": "2040-12-31",
+  "isDefault": "N",
+  "isActive": "Y",
+  "assignments": [
+    { "employeeId": 3721, "effectiveFrom": "2040-01-01", "effectiveTo": "2040-12-31", "isActive": "Y" }
+  ]
+}
+
+Actual Response:
+Status: 201 Created
+Body:
+{
+  "status": "success",
+  "message": "Late/Early Policy created successfully",
+  "data": { "policyId": 141 }
+}
+
+Expected Response:
+Status: 400 Bad Request
+Body:
+{
+  "status": "error",
+  "errorCode": "INACTIVE_LEAVE_TYPE",
+  "message": "Leave Type ID 7 (OD) is inactive and cannot be linked to a Late/Early Policy"
+}
+
+Developer Fix Recommendation:
+Validate `leaveTypeMasterRepository.findByIdAndIsActive(dto.getLeaveTypeId(), "Y")` in the validation layer before persisting the policy.
+
+
+################################################################################
+SECTION 3: WEEK-OFF POLICY MASTER APIS
+Base URL: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/week-offs
+################################################################################
+
+--------------------------------------------------------------------------------
+BUG-HCM-ATT-003: Accepted Inverted Chronological Date Order on Employee Assignment (effectiveTo < effectiveFrom)
+--------------------------------------------------------------------------------
+API Module: Week-Off Policy Master
+API Endpoint: POST /api/attendance/week-offs/create
+HTTP Method: POST
+UI Navigation Path: Attendance Management -> Week Off Policy -> Create Template -> Employee Assignment Grid
+
+Technical & Business Root Cause Explanation:
+The backend fails to assert that `effectiveTo >= effectiveFrom` inside the nested `assignments` array. A record with start date `2029-12-31` and end date `2029-01-01` was successfully stored in the database with HTTP 201 Created.
+
+Request Body:
+{
+  "weekOffName": "Inverted Date Policy Run",
+  "description": "Date order probe",
+  "optionModel": "ALLOWED",
+  "isDefault": "N",
+  "isActive": "Y",
+  "details": [
+    { "dayOfWeek": "SUNDAY", "weekNo": 1, "isWeekOff": "Y" }
+  ],
+  "assignments": [
+    {
+      "employeeId": 3502,
+      "departmentId": 1,
+      "locationId": 1,
+      "effectiveFrom": "2029-12-31",
+      "effectiveTo": "2029-01-01",
+      "isActive": "Y"
+    }
+  ]
+}
+
+Actual Response:
+Status: 201 Created
+Body:
+{
+  "status": "success",
+  "message": "Week Off Master created successfully",
+  "data": { "weekOffId": 135 }
+}
+
+Expected Response:
+Status: 400 Bad Request
+Body:
+{
+  "status": "error",
+  "errorCode": "INVALID_DATE_RANGE",
+  "message": "Effective To date (2029-01-01) cannot precede Effective From date (2029-12-31) for employee 3502"
+}
+
+Developer Fix Recommendation:
+Validate each assignment object before persisting:
+`if (assignment.getEffectiveTo().isBefore(assignment.getEffectiveFrom())) throw new BadRequestException("Effective To cannot precede Effective From");`
+
+
+--------------------------------------------------------------------------------
+BUG-HCM-ATT-011: Unhandled 500 Internal Server Error & JPA Entity Leak (WeekOffMaster) on Invalid Sort Property
+--------------------------------------------------------------------------------
+API Module: Week-Off Policy Master
+API Endpoint: GET /api/attendance/week-offs/getAll
+HTTP Method: GET
+UI Navigation Path: Attendance Management -> Week Off Policy -> Template List Grid
+
+Technical & Business Root Cause Explanation:
+Passing an unmapped sort field to the `sort` query parameter causes Spring Data JPA's `PropertyReferenceException` to bubble up as an unhandled HTTP 500 Server Error. The raw response directly exposes the internal JPA entity class name `WeekOffMaster`, leaking database entity metadata.
+
+Request Parameters:
+?page=0&size=10&sort=non_existent_column,desc
+
+Actual Response:
+Status: 500 Internal Server Error
+Body:
+{
+  "status": "error",
+  "errorCode": "500",
+  "message": "No property 'non' found for type 'WeekOffMaster'",
+  "timestamp": "19-Aug-2026 T10:02:11"
+}
+
+Expected Response:
+Status: 400 Bad Request
+Body:
+{
+  "status": "error",
+  "errorCode": "INVALID_SORT_PROPERTY",
+  "message": "Invalid sort property 'non_existent_column'. Allowed sort fields: ['weekOffId', 'weekOffName', 'optionModel', 'isDefault', 'isActive']",
+  "timestamp": "19-Aug-2026 T10:02:11"
+}
+
+Developer Fix Recommendation:
+Add a `PropertyReferenceException` handler in `GlobalExceptionHandler` to return HTTP 400 with allowed sort properties.
+
+
+################################################################################
+SECTION 4: ATTENDANCE SHIFT MASTER APIS
+Base URL: https://uatmcdphcmplatform.omfysgroup.com/api/v1/attendance/shift/master
+################################################################################
+
+--------------------------------------------------------------------------------
+BUG-HCM-ATT-010: Unhandled 500 Internal Server Error & JPA Entity Leak (ShiftMaster) on Invalid sortBy Parameter
+--------------------------------------------------------------------------------
+API Module: Attendance Shift Master
+API Endpoint: GET /api/v1/attendance/shift/master
+HTTP Method: GET
+UI Navigation Path: Attendance Management -> Shift Master -> Shift List Grid
+
+Technical & Business Root Cause Explanation:
+Passing an unmapped sort field to the `sortBy` query parameter causes Spring Data JPA's `PropertyReferenceException` to bubble up as an unhandled HTTP 500 Server Error. The raw error response directly exposes the internal JPA entity class name `ShiftMaster`, violating secure error-handling standards (CWE-209 / OWASP API3:2023).
+
+Request Parameters:
+?page=0&size=10&sortBy=non_existent_column&sortDirection=DESC
+
+Actual Response:
+Status: 500 Internal Server Error
+Body:
+{
+  "status": "error",
+  "errorCode": "500",
+  "message": "No property 'non' found for type 'ShiftMaster'",
+  "timestamp": "19-Aug-2026 T10:02:09"
+}
+
+Expected Response:
+Status: 400 Bad Request
+Body:
+{
+  "status": "error",
+  "errorCode": "INVALID_SORT_PROPERTY",
+  "message": "Invalid sort property 'non_existent_column'. Allowed sort fields: ['shiftId', 'shiftCode', 'shiftName', 'startTime', 'endTime', 'effectiveFrom', 'effectiveTo']",
+  "timestamp": "19-Aug-2026 T10:02:09"
+}
+
+Developer Fix Recommendation:
+Whitelist allowed sort columns (`shiftId`, `shiftCode`, `shiftName`, `startTime`, `endTime`, `effectiveFrom`, `effectiveTo`) in the controller layer before constructing the Spring Data `Pageable` object.
