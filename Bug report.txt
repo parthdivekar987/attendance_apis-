@@ -9,8 +9,9 @@ Total Documented Defects: 11 Bugs
 
 
 --------------------------------------------------------------------------------
-BUG-HCM-ATT-001: Unhandled 500 Internal Server Error & JPA Entity Leak in Status Threshold Master
+BUG-HCM-ATT-001: [Status Threshold Master] [GET /getAll - Pagination & Sorting] Unhandled 500 Internal Server Error & JPA Entity Leak on Invalid Sort Property
 --------------------------------------------------------------------------------
+Operation: GET (Paginated List & Sorting)
 Method: GET
 URL: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/status-threshold/getAll?page=0&size=10&sort=non_existent_column,desc
 UI Navigation Path: Attendance Management -> Status Threshold -> Threshold List Grid
@@ -43,8 +44,9 @@ Body:
 
 
 --------------------------------------------------------------------------------
-BUG-HCM-ATT-002: Accepted Quotes-Only Threshold Name in Status Threshold Master
+BUG-HCM-ATT-002: [Status Threshold Master] [POST /create - Template Creation] Accepted Quotes-Only Threshold Name ("""") Bypass Validation
 --------------------------------------------------------------------------------
+Operation: POST (Create Template)
 Method: POST
 URL: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/status-threshold/create
 UI Navigation Path: Attendance Management -> Status Threshold -> Create Template -> Threshold Name Input
@@ -99,8 +101,9 @@ Body:
 
 
 --------------------------------------------------------------------------------
-BUG-HCM-ATT-003: Inverted Chronological Date Order on Employee Assignment in Week-Off Policy
+BUG-HCM-ATT-003: [Week-Off Policy Master] [POST /create - Employee Assignment Grid] Accepted Inverted Chronological Date Order (effectiveTo < effectiveFrom)
 --------------------------------------------------------------------------------
+Operation: POST (Create Template with Assignments)
 Method: POST
 URL: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/week-offs/create
 UI Navigation Path: Attendance Management -> Week Off Policy -> Create Template -> Employee Assignment Grid
@@ -150,8 +153,9 @@ Body:
 
 
 --------------------------------------------------------------------------------
-BUG-HCM-ATT-004: Duplicate Employee Fan-Out Collision in Status Threshold Master
+BUG-HCM-ATT-004: [Status Threshold Master] [POST /create - Employee Assignment Table] Duplicate Employee ID Fan-Out Collision in Roster Array
 --------------------------------------------------------------------------------
+Operation: POST (Create Template with Assignments)
 Method: POST
 URL: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/status-threshold/create
 UI Navigation Path: Attendance Management -> Status Threshold -> Create Template -> Employee Assignment Table
@@ -202,8 +206,9 @@ Body:
 
 
 --------------------------------------------------------------------------------
-BUG-HCM-ATT-005: Extreme Working Hours Overflow (50.00h) Accepted in Status Threshold Master
+BUG-HCM-ATT-005: [Status Threshold Master] [POST /create - Working Hours Bounds] Extreme Working Hours Overflow (50.00h/day) Exceeds 24.00h Limit
 --------------------------------------------------------------------------------
+Operation: POST (Create Template - Domain Validation)
 Method: POST
 URL: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/status-threshold/create
 UI Navigation Path: Attendance Management -> Status Threshold -> Create Template -> Working Hours Limits
@@ -253,8 +258,9 @@ Body:
 
 
 --------------------------------------------------------------------------------
-BUG-HCM-ATT-006: Accepted Quotes-Only Policy Name in Late / Early Policy Master
+BUG-HCM-ATT-006: [Late / Early Policy Master] [POST /create - Template Creation] Accepted Quotes-Only Policy Name ("""""") Bypass Validation
 --------------------------------------------------------------------------------
+Operation: POST (Create Template)
 Method: POST
 URL: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/late-early-policies/create
 UI Navigation Path: Attendance Management -> Late Early Policy -> Create Template -> Policy Name Input
@@ -304,8 +310,9 @@ Body:
 
 
 --------------------------------------------------------------------------------
-BUG-HCM-ATT-007: Unhandled 500 Internal Server Error & JPA Entity Leak in Late / Early Policy Master
+BUG-HCM-ATT-007: [Late / Early Policy Master] [GET /getAll - Pagination & Sorting] Unhandled 500 Internal Server Error & JPA Entity Leak on Invalid Sort Property
 --------------------------------------------------------------------------------
+Operation: GET (Paginated List & Sorting)
 Method: GET
 URL: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/late-early-policies/getAll?page=0&size=10&sort=non_existent_column,desc
 UI Navigation Path: Attendance Management -> Late Early Policy -> Policy List Grid
@@ -338,8 +345,9 @@ Body:
 
 
 --------------------------------------------------------------------------------
-BUG-HCM-ATT-008: Status Deactivation Cascade Desynchronization in Late / Early Policy Master
+BUG-HCM-ATT-008: [Late / Early Policy Master] [PATCH /status - Header Deactivation] Missing Status Deactivation Cascade to Child Employee Assignments (isActive Desync)
 --------------------------------------------------------------------------------
+Operation: PATCH (Header Status Deactivation & Child Cascade)
 Method: GET
 URL: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/late-early-policies/getById/138
 UI Navigation Path: Attendance Management -> Late Early Policy -> Deactivate Template -> View Assigned Employees
@@ -388,8 +396,9 @@ Body:
 
 
 --------------------------------------------------------------------------------
-BUG-HCM-ATT-009: Deactivated Leave Type (OD ID 7) Accepted in Late / Early Policy Master
+BUG-HCM-ATT-009: [Late / Early Policy Master] [POST /create - Foreign Master Relational Gating] Deactivated Leave Type (OD ID 7) Linked, Causing Blank Dropdown in UI
 --------------------------------------------------------------------------------
+Operation: POST (Create Template with Foreign Entity Link)
 Method: POST
 URL: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/late-early-policies/create
 UI Navigation Path: Attendance Management -> Late Early Policy -> Create Template -> Leave Type Dropdown
@@ -439,8 +448,9 @@ Body:
 
 
 --------------------------------------------------------------------------------
-BUG-HCM-ATT-010: Unhandled 500 Internal Server Error & JPA Entity Leak in Attendance Shift Master
+BUG-HCM-ATT-010: [Attendance Shift Master] [GET /master - Pagination & Sorting] Unhandled 500 Internal Server Error & JPA Entity Leak (ShiftMaster) on Invalid sortBy Parameter
 --------------------------------------------------------------------------------
+Operation: GET (Paginated List & Sorting)
 Method: GET
 URL: https://uatmcdphcmplatform.omfysgroup.com/api/v1/attendance/shift/master?page=0&size=10&sortBy=non_existent_column&sortDirection=DESC
 UI Navigation Path: Attendance Management -> Shift Master -> Shift List Grid
@@ -473,8 +483,9 @@ Body:
 
 
 --------------------------------------------------------------------------------
-BUG-HCM-ATT-011: Unhandled 500 Internal Server Error & JPA Entity Leak in Week-Off Policy Master
+BUG-HCM-ATT-011: [Week-Off Policy Master] [GET /getAll - Pagination & Sorting] Unhandled 500 Internal Server Error & JPA Entity Leak (WeekOffMaster) on Invalid Sort Property
 --------------------------------------------------------------------------------
+Operation: GET (Paginated List & Sorting)
 Method: GET
 URL: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/week-offs/getAll?page=0&size=10&sort=non_existent_column,desc
 UI Navigation Path: Attendance Management -> Week Off Policy -> Template List Grid
