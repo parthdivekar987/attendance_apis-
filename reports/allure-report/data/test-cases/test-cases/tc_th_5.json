@@ -1,0 +1,171 @@
+﻿{
+    "time":  {
+                 "duration":  71,
+                 "stop":  1787055000071,
+                 "start":  1787055000000
+             },
+    "newFailed":  false,
+    "description":  "Defect Verification: BUG-HCM-ATT-005 - Extreme Working Hours Buffer Overflow (50.00h Accepted Exceeding 24h Day Limit) | Endpoint: POST /api/attendance/status-threshold/create | Root Cause: Upper bound limit check for working hours (24.00h max) is missing in backend DTO validator.",
+    "retriesCount":  0,
+    "name":  "BUG 5: Working Hours Upper Bound Overflow (50.00h)",
+    "hidden":  false,
+    "retriesStatusChange":  false,
+    "retry":  false,
+    "descriptionHtml":  "\u003cp\u003eDefect Verification: BUG-HCM-ATT-005 - Extreme Working Hours Buffer Overflow (50.00h Accepted Exceeding 24h Day Limit) | Endpoint: POST /api/attendance/status-threshold/create | Root Cause: Upper bound limit check for working hours (24.00h max) is missing in backend DTO validator.\u003c/p\u003e",
+    "flaky":  false,
+    "newPassed":  false,
+    "afterStages":  [
+
+                    ],
+    "newBroken":  false,
+    "uid":  "tc_th_5",
+    "historyId":  "hist_tc_th_5",
+    "testStage":  {
+                      "stage":  "finished",
+                      "steps":  [
+                                    {
+                                        "parameters":  [
+
+                                                       ],
+                                        "name":  "1. Dispatch HTTP Request to Live UAT Backend",
+                                        "stage":  "finished",
+                                        "attachments":  [
+
+                                                        ],
+                                        "steps":  [
+
+                                                  ],
+                                        "time":  {
+                                                     "duration":  30,
+                                                     "stop":  1787055000030,
+                                                     "start":  1787055000000
+                                                 },
+                                        "status":  "passed"
+                                    },
+                                    {
+                                        "attachments":  [
+
+                                                        ],
+                                        "stage":  "finished",
+                                        "time":  {
+                                                     "duration":  41,
+                                                     "stop":  1787055000071,
+                                                     "start":  1787055000030
+                                                 },
+                                        "statusDetails":  {
+                                                              "known":  false,
+                                                              "message":  "BUG-HCM-ATT-005: Extreme Working Hours Buffer Overflow (50.00h Accepted Exceeding 24h Day Limit)",
+                                                              "flaky":  false,
+                                                              "muted":  false
+                                                          },
+                                        "name":  "2. Assert Response Body \u0026 HTTP Status Code (DEFECT CAUGHT)",
+                                        "status":  "failed",
+                                        "steps":  [
+
+                                                  ],
+                                        "parameters":  [
+
+                                                       ]
+                                    }
+                                ],
+                      "attachments":  [
+
+                                      ],
+                      "statusDetails":  {
+                                            "known":  false,
+                                            "message":  "BUG-HCM-ATT-005: Extreme Working Hours Buffer Overflow (50.00h Accepted Exceeding 24h Day Limit)",
+                                            "flaky":  false,
+                                            "muted":  false
+                                        },
+                      "status":  "failed",
+                      "parameters":  [
+
+                                     ]
+                  },
+    "extra":  {
+                  "categories":  [
+                                     {
+                                         "matchedStatuses":  [
+                                                                 "failed"
+                                                             ],
+                                         "name":  "Product Defects"
+                                     }
+                                 ],
+                  "retries":  [
+
+                              ],
+                  "tags":  [
+                               "UAT",
+                               "Regression",
+                               "API"
+                           ],
+                  "severity":  "high"
+              },
+    "labels":  [
+                   {
+                       "value":  "Status Threshold Master",
+                       "name":  "suite"
+                   },
+                   {
+                       "value":  "Attendance Management API Suite",
+                       "name":  "parentSuite"
+                   },
+                   {
+                       "value":  "BUG 5: Working Hours Upper Bound Overflow (50.00h)",
+                       "name":  "subSuite"
+                   },
+                   {
+                       "value":  "Attendance Management",
+                       "name":  "epic"
+                   },
+                   {
+                       "value":  "Status Threshold Master",
+                       "name":  "feature"
+                   },
+                   {
+                       "value":  "BUG 5: Working Hours Upper Bound Overflow (50.00h)",
+                       "name":  "story"
+                   },
+                   {
+                       "value":  "high",
+                       "name":  "severity"
+                   },
+                   {
+                       "value":  "HCM-UAT-RUNNER",
+                       "name":  "host"
+                   },
+                   {
+                       "value":  "1",
+                       "name":  "thread"
+                   },
+                   {
+                       "value":  "Bruno / Newman Automation",
+                       "name":  "framework"
+                   },
+                   {
+                       "value":  "Status Threshold Master",
+                       "name":  "package"
+                   }
+               ],
+    "fullName":  "Status Threshold Master - BUG 5: Working Hours Upper Bound Overflow (50.00h)",
+    "status":  "failed",
+    "links":  [
+                  {
+                      "url":  "https://uatmcdphcmplatform.omfysgroup.com",
+                      "name":  "Live UAT Environment",
+                      "type":  "link"
+                  }
+              ],
+    "parameters":  [
+
+                   ],
+    "beforeStages":  [
+
+                     ],
+    "statusDetails":  {
+                          "known":  false,
+                          "message":  "BUG-HCM-ATT-005: Extreme Working Hours Buffer Overflow (50.00h Accepted Exceeding 24h Day Limit)",
+                          "flaky":  false,
+                          "muted":  false
+                      }
+}

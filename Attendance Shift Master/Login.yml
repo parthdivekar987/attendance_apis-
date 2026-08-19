@@ -1,0 +1,39 @@
+info:
+  name: Login
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: https://uat-mcdp-be.omfysgroup.com/auth/token
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "empCode": "OMI-0076",
+        "password": "Omfys@123"
+      }
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        const resData = res.getBody();
+        if (resData && resData.token) {
+            bru.setEnvVar("authToken", resData.token);
+            bru.setVar("authToken", resData.token);
+            console.log("==========================================");
+            console.log("âœ” UAT AUTH TOKEN GENERATED & SAVED!");
+            console.log("ðŸ”‘ Token:", resData.token);
+            console.log("==========================================");
+        }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

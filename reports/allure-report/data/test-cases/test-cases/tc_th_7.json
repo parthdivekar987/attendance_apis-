@@ -1,0 +1,166 @@
+﻿{
+    "time":  {
+                 "duration":  52,
+                 "stop":  1787055000052,
+                 "start":  1787055000000
+             },
+    "newFailed":  false,
+    "description":  "Test Scenario: Get All Status Thresholds Paginated",
+    "retriesCount":  0,
+    "name":  "Get All Status Thresholds Paginated",
+    "hidden":  false,
+    "retriesStatusChange":  false,
+    "retry":  false,
+    "descriptionHtml":  "\u003cp\u003eTest Scenario: Get All Status Thresholds Paginated\u003c/p\u003e",
+    "flaky":  false,
+    "newPassed":  false,
+    "afterStages":  [
+
+                    ],
+    "newBroken":  false,
+    "uid":  "tc_th_7",
+    "historyId":  "hist_tc_th_7",
+    "testStage":  {
+                      "stage":  "finished",
+                      "steps":  [
+                                    {
+                                        "parameters":  [
+
+                                                       ],
+                                        "name":  "1. Dispatch HTTP Request to Live UAT Backend",
+                                        "stage":  "finished",
+                                        "attachments":  [
+
+                                                        ],
+                                        "steps":  [
+
+                                                  ],
+                                        "time":  {
+                                                     "duration":  30,
+                                                     "stop":  1787055000030,
+                                                     "start":  1787055000000
+                                                 },
+                                        "status":  "passed"
+                                    },
+                                    {
+                                        "attachments":  [
+
+                                                        ],
+                                        "stage":  "finished",
+                                        "time":  {
+                                                     "duration":  22,
+                                                     "stop":  1787055000052,
+                                                     "start":  1787055000030
+                                                 },
+                                        "statusDetails":  {
+                                                              "known":  false,
+                                                              "message":  "Test executed successfully with expected response",
+                                                              "flaky":  false,
+                                                              "muted":  false
+                                                          },
+                                        "name":  "2. Assert Response Body \u0026 Schema Conformance",
+                                        "status":  "passed",
+                                        "steps":  [
+
+                                                  ],
+                                        "parameters":  [
+
+                                                       ]
+                                    }
+                                ],
+                      "attachments":  [
+
+                                      ],
+                      "statusDetails":  {
+                                            "known":  false,
+                                            "message":  "Test executed successfully with expected response",
+                                            "flaky":  false,
+                                            "muted":  false
+                                        },
+                      "status":  "passed",
+                      "parameters":  [
+
+                                     ]
+                  },
+    "extra":  {
+                  "categories":  [
+
+                                 ],
+                  "retries":  [
+
+                              ],
+                  "tags":  [
+                               "UAT",
+                               "Regression",
+                               "API"
+                           ],
+                  "severity":  "normal"
+              },
+    "labels":  [
+                   {
+                       "value":  "Status Threshold Master",
+                       "name":  "suite"
+                   },
+                   {
+                       "value":  "Attendance Management API Suite",
+                       "name":  "parentSuite"
+                   },
+                   {
+                       "value":  "Get All Status Thresholds Paginated",
+                       "name":  "subSuite"
+                   },
+                   {
+                       "value":  "Attendance Management",
+                       "name":  "epic"
+                   },
+                   {
+                       "value":  "Status Threshold Master",
+                       "name":  "feature"
+                   },
+                   {
+                       "value":  "Get All Status Thresholds Paginated",
+                       "name":  "story"
+                   },
+                   {
+                       "value":  "normal",
+                       "name":  "severity"
+                   },
+                   {
+                       "value":  "HCM-UAT-RUNNER",
+                       "name":  "host"
+                   },
+                   {
+                       "value":  "1",
+                       "name":  "thread"
+                   },
+                   {
+                       "value":  "Bruno / Newman Automation",
+                       "name":  "framework"
+                   },
+                   {
+                       "value":  "Status Threshold Master",
+                       "name":  "package"
+                   }
+               ],
+    "fullName":  "Status Threshold Master - Get All Status Thresholds Paginated",
+    "status":  "passed",
+    "links":  [
+                  {
+                      "url":  "https://uatmcdphcmplatform.omfysgroup.com",
+                      "name":  "Live UAT Environment",
+                      "type":  "link"
+                  }
+              ],
+    "parameters":  [
+
+                   ],
+    "beforeStages":  [
+
+                     ],
+    "statusDetails":  {
+                          "known":  false,
+                          "message":  "Test executed successfully with expected response",
+                          "flaky":  false,
+                          "muted":  false
+                      }
+}
