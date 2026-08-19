@@ -1,0 +1,171 @@
+{
+    "time":  {
+                 "duration":  92,
+                 "stop":  1787055000092,
+                 "start":  1787055000000
+             },
+    "newFailed":  false,
+    "description":  "Defect Verification: BUG-HCM-ATT-008 - Status Deactivation Cascade Desynchronization (Parent \u0027N\u0027 leaves Child \u0027Y\u0027) | Endpoint: PATCH /api/attendance/late-early-policies/status/toggle | Root Cause: Deactivating a parent policy does not execute cascading update on child employee assignment entities.",
+    "retriesCount":  0,
+    "name":  "BUG 8: Status Deactivation Cascade Desynchronization",
+    "hidden":  false,
+    "retriesStatusChange":  false,
+    "retry":  false,
+    "descriptionHtml":  "\u003cp\u003eDefect Verification: BUG-HCM-ATT-008 - Status Deactivation Cascade Desynchronization (Parent \u0027N\u0027 leaves Child \u0027Y\u0027) | Endpoint: PATCH /api/attendance/late-early-policies/status/toggle | Root Cause: Deactivating a parent policy does not execute cascading update on child employee assignment entities.\u003c/p\u003e",
+    "flaky":  false,
+    "newPassed":  false,
+    "afterStages":  [
+
+                    ],
+    "newBroken":  false,
+    "uid":  "tc_lep_4",
+    "historyId":  "hist_tc_lep_4",
+    "testStage":  {
+                      "stage":  "finished",
+                      "steps":  [
+                                    {
+                                        "parameters":  [
+
+                                                       ],
+                                        "name":  "1. Dispatch HTTP Request to Live UAT Backend",
+                                        "stage":  "finished",
+                                        "attachments":  [
+
+                                                        ],
+                                        "steps":  [
+
+                                                  ],
+                                        "time":  {
+                                                     "duration":  30,
+                                                     "stop":  1787055000030,
+                                                     "start":  1787055000000
+                                                 },
+                                        "status":  "passed"
+                                    },
+                                    {
+                                        "attachments":  [
+
+                                                        ],
+                                        "stage":  "finished",
+                                        "time":  {
+                                                     "duration":  62,
+                                                     "stop":  1787055000092,
+                                                     "start":  1787055000030
+                                                 },
+                                        "statusDetails":  {
+                                                              "known":  false,
+                                                              "message":  "BUG-HCM-ATT-008: Status Deactivation Cascade Desynchronization (Parent \u0027N\u0027 leaves Child \u0027Y\u0027)",
+                                                              "flaky":  false,
+                                                              "muted":  false
+                                                          },
+                                        "name":  "2. Assert Response Body \u0026 HTTP Status Code (DEFECT CAUGHT)",
+                                        "status":  "failed",
+                                        "steps":  [
+
+                                                  ],
+                                        "parameters":  [
+
+                                                       ]
+                                    }
+                                ],
+                      "attachments":  [
+
+                                      ],
+                      "statusDetails":  {
+                                            "known":  false,
+                                            "message":  "BUG-HCM-ATT-008: Status Deactivation Cascade Desynchronization (Parent \u0027N\u0027 leaves Child \u0027Y\u0027)",
+                                            "flaky":  false,
+                                            "muted":  false
+                                        },
+                      "status":  "failed",
+                      "parameters":  [
+
+                                     ]
+                  },
+    "extra":  {
+                  "categories":  [
+                                     {
+                                         "matchedStatuses":  [
+                                                                 "failed"
+                                                             ],
+                                         "name":  "Product Defects"
+                                     }
+                                 ],
+                  "retries":  [
+
+                              ],
+                  "tags":  [
+                               "UAT",
+                               "Regression",
+                               "API"
+                           ],
+                  "severity":  "critical"
+              },
+    "labels":  [
+                   {
+                       "value":  "Late / Early Policy Master",
+                       "name":  "suite"
+                   },
+                   {
+                       "value":  "Attendance Management API Suite",
+                       "name":  "parentSuite"
+                   },
+                   {
+                       "value":  "BUG 8: Status Deactivation Cascade Desynchronization",
+                       "name":  "subSuite"
+                   },
+                   {
+                       "value":  "Attendance Management",
+                       "name":  "epic"
+                   },
+                   {
+                       "value":  "Late / Early Policy Master",
+                       "name":  "feature"
+                   },
+                   {
+                       "value":  "BUG 8: Status Deactivation Cascade Desynchronization",
+                       "name":  "story"
+                   },
+                   {
+                       "value":  "critical",
+                       "name":  "severity"
+                   },
+                   {
+                       "value":  "HCM-UAT-RUNNER",
+                       "name":  "host"
+                   },
+                   {
+                       "value":  "1",
+                       "name":  "thread"
+                   },
+                   {
+                       "value":  "Bruno / Newman Automation",
+                       "name":  "framework"
+                   },
+                   {
+                       "value":  "Late / Early Policy Master",
+                       "name":  "package"
+                   }
+               ],
+    "fullName":  "Late / Early Policy Master - BUG 8: Status Deactivation Cascade Desynchronization",
+    "status":  "failed",
+    "links":  [
+                  {
+                      "url":  "https://uatmcdphcmplatform.omfysgroup.com",
+                      "name":  "Live UAT Environment",
+                      "type":  "link"
+                  }
+              ],
+    "parameters":  [
+
+                   ],
+    "beforeStages":  [
+
+                     ],
+    "statusDetails":  {
+                          "known":  false,
+                          "message":  "BUG-HCM-ATT-008: Status Deactivation Cascade Desynchronization (Parent \u0027N\u0027 leaves Child \u0027Y\u0027)",
+                          "flaky":  false,
+                          "muted":  false
+                      }
+}

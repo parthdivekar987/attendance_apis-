@@ -1,0 +1,171 @@
+{
+    "time":  {
+                 "duration":  66,
+                 "stop":  1787055000066,
+                 "start":  1787055000000
+             },
+    "newFailed":  false,
+    "description":  "Defect Verification: BUG-HCM-ATT-002 - Status Threshold Master Accepted Quotes-Only Name Returning 201 Created | Endpoint: POST /api/attendance/status-threshold/create | Root Cause: Input sanitizer removes quotes but fails to validate that the resulting string is non-empty before inserting into DB.",
+    "retriesCount":  0,
+    "name":  "BUG 2: Quotes-Only Threshold Name Accepted",
+    "hidden":  false,
+    "retriesStatusChange":  false,
+    "retry":  false,
+    "descriptionHtml":  "\u003cp\u003eDefect Verification: BUG-HCM-ATT-002 - Status Threshold Master Accepted Quotes-Only Name Returning 201 Created | Endpoint: POST /api/attendance/status-threshold/create | Root Cause: Input sanitizer removes quotes but fails to validate that the resulting string is non-empty before inserting into DB.\u003c/p\u003e",
+    "flaky":  false,
+    "newPassed":  false,
+    "afterStages":  [
+
+                    ],
+    "newBroken":  false,
+    "uid":  "tc_th_3",
+    "historyId":  "hist_tc_th_3",
+    "testStage":  {
+                      "stage":  "finished",
+                      "steps":  [
+                                    {
+                                        "parameters":  [
+
+                                                       ],
+                                        "name":  "1. Dispatch HTTP Request to Live UAT Backend",
+                                        "stage":  "finished",
+                                        "attachments":  [
+
+                                                        ],
+                                        "steps":  [
+
+                                                  ],
+                                        "time":  {
+                                                     "duration":  30,
+                                                     "stop":  1787055000030,
+                                                     "start":  1787055000000
+                                                 },
+                                        "status":  "passed"
+                                    },
+                                    {
+                                        "attachments":  [
+
+                                                        ],
+                                        "stage":  "finished",
+                                        "time":  {
+                                                     "duration":  36,
+                                                     "stop":  1787055000066,
+                                                     "start":  1787055000030
+                                                 },
+                                        "statusDetails":  {
+                                                              "known":  false,
+                                                              "message":  "BUG-HCM-ATT-002: Status Threshold Master Accepted Quotes-Only Name Returning 201 Created",
+                                                              "flaky":  false,
+                                                              "muted":  false
+                                                          },
+                                        "name":  "2. Assert Response Body \u0026 HTTP Status Code (DEFECT CAUGHT)",
+                                        "status":  "failed",
+                                        "steps":  [
+
+                                                  ],
+                                        "parameters":  [
+
+                                                       ]
+                                    }
+                                ],
+                      "attachments":  [
+
+                                      ],
+                      "statusDetails":  {
+                                            "known":  false,
+                                            "message":  "BUG-HCM-ATT-002: Status Threshold Master Accepted Quotes-Only Name Returning 201 Created",
+                                            "flaky":  false,
+                                            "muted":  false
+                                        },
+                      "status":  "failed",
+                      "parameters":  [
+
+                                     ]
+                  },
+    "extra":  {
+                  "categories":  [
+                                     {
+                                         "matchedStatuses":  [
+                                                                 "failed"
+                                                             ],
+                                         "name":  "Product Defects"
+                                     }
+                                 ],
+                  "retries":  [
+
+                              ],
+                  "tags":  [
+                               "UAT",
+                               "Regression",
+                               "API"
+                           ],
+                  "severity":  "critical"
+              },
+    "labels":  [
+                   {
+                       "value":  "Status Threshold Master",
+                       "name":  "suite"
+                   },
+                   {
+                       "value":  "Attendance Management API Suite",
+                       "name":  "parentSuite"
+                   },
+                   {
+                       "value":  "BUG 2: Quotes-Only Threshold Name Accepted",
+                       "name":  "subSuite"
+                   },
+                   {
+                       "value":  "Attendance Management",
+                       "name":  "epic"
+                   },
+                   {
+                       "value":  "Status Threshold Master",
+                       "name":  "feature"
+                   },
+                   {
+                       "value":  "BUG 2: Quotes-Only Threshold Name Accepted",
+                       "name":  "story"
+                   },
+                   {
+                       "value":  "critical",
+                       "name":  "severity"
+                   },
+                   {
+                       "value":  "HCM-UAT-RUNNER",
+                       "name":  "host"
+                   },
+                   {
+                       "value":  "1",
+                       "name":  "thread"
+                   },
+                   {
+                       "value":  "Bruno / Newman Automation",
+                       "name":  "framework"
+                   },
+                   {
+                       "value":  "Status Threshold Master",
+                       "name":  "package"
+                   }
+               ],
+    "fullName":  "Status Threshold Master - BUG 2: Quotes-Only Threshold Name Accepted",
+    "status":  "failed",
+    "links":  [
+                  {
+                      "url":  "https://uatmcdphcmplatform.omfysgroup.com",
+                      "name":  "Live UAT Environment",
+                      "type":  "link"
+                  }
+              ],
+    "parameters":  [
+
+                   ],
+    "beforeStages":  [
+
+                     ],
+    "statusDetails":  {
+                          "known":  false,
+                          "message":  "BUG-HCM-ATT-002: Status Threshold Master Accepted Quotes-Only Name Returning 201 Created",
+                          "flaky":  false,
+                          "muted":  false
+                      }
+}

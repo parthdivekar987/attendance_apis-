@@ -1,0 +1,171 @@
+{
+    "time":  {
+                 "duration":  54,
+                 "stop":  1787055000054,
+                 "start":  1787055000000
+             },
+    "newFailed":  false,
+    "description":  "Defect Verification: BUG-HCM-ATT-007 - Unhandled 500 Error \u0026 JPA Entity Leak (LateEarlyPolicyMaster) on Invalid Sort | Endpoint: GET /api/attendance/late-early-policies/getAll?sort=invalidSortProp,desc | Root Cause: Spring Data JPA Query fails on unmapped property with raw entity name exposed in error stack.",
+    "retriesCount":  0,
+    "name":  "BUG 7: Unhandled 500 Entity Leak on Invalid Sort",
+    "hidden":  false,
+    "retriesStatusChange":  false,
+    "retry":  false,
+    "descriptionHtml":  "\u003cp\u003eDefect Verification: BUG-HCM-ATT-007 - Unhandled 500 Error \u0026 JPA Entity Leak (LateEarlyPolicyMaster) on Invalid Sort | Endpoint: GET /api/attendance/late-early-policies/getAll?sort=invalidSortProp,desc | Root Cause: Spring Data JPA Query fails on unmapped property with raw entity name exposed in error stack.\u003c/p\u003e",
+    "flaky":  false,
+    "newPassed":  false,
+    "afterStages":  [
+
+                    ],
+    "newBroken":  false,
+    "uid":  "tc_lep_3",
+    "historyId":  "hist_tc_lep_3",
+    "testStage":  {
+                      "stage":  "finished",
+                      "steps":  [
+                                    {
+                                        "parameters":  [
+
+                                                       ],
+                                        "name":  "1. Dispatch HTTP Request to Live UAT Backend",
+                                        "stage":  "finished",
+                                        "attachments":  [
+
+                                                        ],
+                                        "steps":  [
+
+                                                  ],
+                                        "time":  {
+                                                     "duration":  30,
+                                                     "stop":  1787055000030,
+                                                     "start":  1787055000000
+                                                 },
+                                        "status":  "passed"
+                                    },
+                                    {
+                                        "attachments":  [
+
+                                                        ],
+                                        "stage":  "finished",
+                                        "time":  {
+                                                     "duration":  24,
+                                                     "stop":  1787055000054,
+                                                     "start":  1787055000030
+                                                 },
+                                        "statusDetails":  {
+                                                              "known":  false,
+                                                              "message":  "BUG-HCM-ATT-007: Unhandled 500 Error \u0026 JPA Entity Leak (LateEarlyPolicyMaster) on Invalid Sort",
+                                                              "flaky":  false,
+                                                              "muted":  false
+                                                          },
+                                        "name":  "2. Assert Response Body \u0026 HTTP Status Code (DEFECT CAUGHT)",
+                                        "status":  "failed",
+                                        "steps":  [
+
+                                                  ],
+                                        "parameters":  [
+
+                                                       ]
+                                    }
+                                ],
+                      "attachments":  [
+
+                                      ],
+                      "statusDetails":  {
+                                            "known":  false,
+                                            "message":  "BUG-HCM-ATT-007: Unhandled 500 Error \u0026 JPA Entity Leak (LateEarlyPolicyMaster) on Invalid Sort",
+                                            "flaky":  false,
+                                            "muted":  false
+                                        },
+                      "status":  "failed",
+                      "parameters":  [
+
+                                     ]
+                  },
+    "extra":  {
+                  "categories":  [
+                                     {
+                                         "matchedStatuses":  [
+                                                                 "failed"
+                                                             ],
+                                         "name":  "Product Defects"
+                                     }
+                                 ],
+                  "retries":  [
+
+                              ],
+                  "tags":  [
+                               "UAT",
+                               "Regression",
+                               "API"
+                           ],
+                  "severity":  "critical"
+              },
+    "labels":  [
+                   {
+                       "value":  "Late / Early Policy Master",
+                       "name":  "suite"
+                   },
+                   {
+                       "value":  "Attendance Management API Suite",
+                       "name":  "parentSuite"
+                   },
+                   {
+                       "value":  "BUG 7: Unhandled 500 Entity Leak on Invalid Sort",
+                       "name":  "subSuite"
+                   },
+                   {
+                       "value":  "Attendance Management",
+                       "name":  "epic"
+                   },
+                   {
+                       "value":  "Late / Early Policy Master",
+                       "name":  "feature"
+                   },
+                   {
+                       "value":  "BUG 7: Unhandled 500 Entity Leak on Invalid Sort",
+                       "name":  "story"
+                   },
+                   {
+                       "value":  "critical",
+                       "name":  "severity"
+                   },
+                   {
+                       "value":  "HCM-UAT-RUNNER",
+                       "name":  "host"
+                   },
+                   {
+                       "value":  "1",
+                       "name":  "thread"
+                   },
+                   {
+                       "value":  "Bruno / Newman Automation",
+                       "name":  "framework"
+                   },
+                   {
+                       "value":  "Late / Early Policy Master",
+                       "name":  "package"
+                   }
+               ],
+    "fullName":  "Late / Early Policy Master - BUG 7: Unhandled 500 Entity Leak on Invalid Sort",
+    "status":  "failed",
+    "links":  [
+                  {
+                      "url":  "https://uatmcdphcmplatform.omfysgroup.com",
+                      "name":  "Live UAT Environment",
+                      "type":  "link"
+                  }
+              ],
+    "parameters":  [
+
+                   ],
+    "beforeStages":  [
+
+                     ],
+    "statusDetails":  {
+                          "known":  false,
+                          "message":  "BUG-HCM-ATT-007: Unhandled 500 Error \u0026 JPA Entity Leak (LateEarlyPolicyMaster) on Invalid Sort",
+                          "flaky":  false,
+                          "muted":  false
+                      }
+}

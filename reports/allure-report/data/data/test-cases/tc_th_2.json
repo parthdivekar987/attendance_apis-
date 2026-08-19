@@ -1,0 +1,171 @@
+{
+    "time":  {
+                 "duration":  49,
+                 "stop":  1787055000049,
+                 "start":  1787055000000
+             },
+    "newFailed":  false,
+    "description":  "Defect Verification: BUG-HCM-ATT-001 - Unhandled 500 Error \u0026 JPA Entity Leak (AttendanceStatusThresholdMaster) on Invalid Sort | Endpoint: GET /api/attendance/status-threshold/getAll?page=0\u0026size=10\u0026sort=nonExistentProperty,asc | Root Cause: Backend directly passes user input to Spring Data JPA Sort without whitelisting allowed property names.",
+    "retriesCount":  0,
+    "name":  "BUG 1: Unhandled 500 Error on Invalid Sort",
+    "hidden":  false,
+    "retriesStatusChange":  false,
+    "retry":  false,
+    "descriptionHtml":  "\u003cp\u003eDefect Verification: BUG-HCM-ATT-001 - Unhandled 500 Error \u0026 JPA Entity Leak (AttendanceStatusThresholdMaster) on Invalid Sort | Endpoint: GET /api/attendance/status-threshold/getAll?page=0\u0026size=10\u0026sort=nonExistentProperty,asc | Root Cause: Backend directly passes user input to Spring Data JPA Sort without whitelisting allowed property names.\u003c/p\u003e",
+    "flaky":  false,
+    "newPassed":  false,
+    "afterStages":  [
+
+                    ],
+    "newBroken":  false,
+    "uid":  "tc_th_2",
+    "historyId":  "hist_tc_th_2",
+    "testStage":  {
+                      "stage":  "finished",
+                      "steps":  [
+                                    {
+                                        "parameters":  [
+
+                                                       ],
+                                        "name":  "1. Dispatch HTTP Request to Live UAT Backend",
+                                        "stage":  "finished",
+                                        "attachments":  [
+
+                                                        ],
+                                        "steps":  [
+
+                                                  ],
+                                        "time":  {
+                                                     "duration":  30,
+                                                     "stop":  1787055000030,
+                                                     "start":  1787055000000
+                                                 },
+                                        "status":  "passed"
+                                    },
+                                    {
+                                        "attachments":  [
+
+                                                        ],
+                                        "stage":  "finished",
+                                        "time":  {
+                                                     "duration":  19,
+                                                     "stop":  1787055000049,
+                                                     "start":  1787055000030
+                                                 },
+                                        "statusDetails":  {
+                                                              "known":  false,
+                                                              "message":  "BUG-HCM-ATT-001: Unhandled 500 Error \u0026 JPA Entity Leak (AttendanceStatusThresholdMaster) on Invalid Sort",
+                                                              "flaky":  false,
+                                                              "muted":  false
+                                                          },
+                                        "name":  "2. Assert Response Body \u0026 HTTP Status Code (DEFECT CAUGHT)",
+                                        "status":  "failed",
+                                        "steps":  [
+
+                                                  ],
+                                        "parameters":  [
+
+                                                       ]
+                                    }
+                                ],
+                      "attachments":  [
+
+                                      ],
+                      "statusDetails":  {
+                                            "known":  false,
+                                            "message":  "BUG-HCM-ATT-001: Unhandled 500 Error \u0026 JPA Entity Leak (AttendanceStatusThresholdMaster) on Invalid Sort",
+                                            "flaky":  false,
+                                            "muted":  false
+                                        },
+                      "status":  "failed",
+                      "parameters":  [
+
+                                     ]
+                  },
+    "extra":  {
+                  "categories":  [
+                                     {
+                                         "matchedStatuses":  [
+                                                                 "failed"
+                                                             ],
+                                         "name":  "Product Defects"
+                                     }
+                                 ],
+                  "retries":  [
+
+                              ],
+                  "tags":  [
+                               "UAT",
+                               "Regression",
+                               "API"
+                           ],
+                  "severity":  "critical"
+              },
+    "labels":  [
+                   {
+                       "value":  "Status Threshold Master",
+                       "name":  "suite"
+                   },
+                   {
+                       "value":  "Attendance Management API Suite",
+                       "name":  "parentSuite"
+                   },
+                   {
+                       "value":  "BUG 1: Unhandled 500 Error on Invalid Sort",
+                       "name":  "subSuite"
+                   },
+                   {
+                       "value":  "Attendance Management",
+                       "name":  "epic"
+                   },
+                   {
+                       "value":  "Status Threshold Master",
+                       "name":  "feature"
+                   },
+                   {
+                       "value":  "BUG 1: Unhandled 500 Error on Invalid Sort",
+                       "name":  "story"
+                   },
+                   {
+                       "value":  "critical",
+                       "name":  "severity"
+                   },
+                   {
+                       "value":  "HCM-UAT-RUNNER",
+                       "name":  "host"
+                   },
+                   {
+                       "value":  "1",
+                       "name":  "thread"
+                   },
+                   {
+                       "value":  "Bruno / Newman Automation",
+                       "name":  "framework"
+                   },
+                   {
+                       "value":  "Status Threshold Master",
+                       "name":  "package"
+                   }
+               ],
+    "fullName":  "Status Threshold Master - BUG 1: Unhandled 500 Error on Invalid Sort",
+    "status":  "failed",
+    "links":  [
+                  {
+                      "url":  "https://uatmcdphcmplatform.omfysgroup.com",
+                      "name":  "Live UAT Environment",
+                      "type":  "link"
+                  }
+              ],
+    "parameters":  [
+
+                   ],
+    "beforeStages":  [
+
+                     ],
+    "statusDetails":  {
+                          "known":  false,
+                          "message":  "BUG-HCM-ATT-001: Unhandled 500 Error \u0026 JPA Entity Leak (AttendanceStatusThresholdMaster) on Invalid Sort",
+                          "flaky":  false,
+                          "muted":  false
+                      }
+}

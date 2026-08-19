@@ -1,0 +1,166 @@
+{
+    "time":  {
+                 "duration":  43,
+                 "stop":  1787055000043,
+                 "start":  1787055000000
+             },
+    "newFailed":  false,
+    "description":  "Test Scenario: Get Policy By ID with Child Entities",
+    "retriesCount":  0,
+    "name":  "Get Policy By ID with Child Entities",
+    "hidden":  false,
+    "retriesStatusChange":  false,
+    "retry":  false,
+    "descriptionHtml":  "\u003cp\u003eTest Scenario: Get Policy By ID with Child Entities\u003c/p\u003e",
+    "flaky":  false,
+    "newPassed":  false,
+    "afterStages":  [
+
+                    ],
+    "newBroken":  false,
+    "uid":  "tc_lep_10",
+    "historyId":  "hist_tc_lep_10",
+    "testStage":  {
+                      "stage":  "finished",
+                      "steps":  [
+                                    {
+                                        "parameters":  [
+
+                                                       ],
+                                        "name":  "1. Dispatch HTTP Request to Live UAT Backend",
+                                        "stage":  "finished",
+                                        "attachments":  [
+
+                                                        ],
+                                        "steps":  [
+
+                                                  ],
+                                        "time":  {
+                                                     "duration":  30,
+                                                     "stop":  1787055000030,
+                                                     "start":  1787055000000
+                                                 },
+                                        "status":  "passed"
+                                    },
+                                    {
+                                        "attachments":  [
+
+                                                        ],
+                                        "stage":  "finished",
+                                        "time":  {
+                                                     "duration":  13,
+                                                     "stop":  1787055000043,
+                                                     "start":  1787055000030
+                                                 },
+                                        "statusDetails":  {
+                                                              "known":  false,
+                                                              "message":  "Test executed successfully with expected response",
+                                                              "flaky":  false,
+                                                              "muted":  false
+                                                          },
+                                        "name":  "2. Assert Response Body \u0026 Schema Conformance",
+                                        "status":  "passed",
+                                        "steps":  [
+
+                                                  ],
+                                        "parameters":  [
+
+                                                       ]
+                                    }
+                                ],
+                      "attachments":  [
+
+                                      ],
+                      "statusDetails":  {
+                                            "known":  false,
+                                            "message":  "Test executed successfully with expected response",
+                                            "flaky":  false,
+                                            "muted":  false
+                                        },
+                      "status":  "passed",
+                      "parameters":  [
+
+                                     ]
+                  },
+    "extra":  {
+                  "categories":  [
+
+                                 ],
+                  "retries":  [
+
+                              ],
+                  "tags":  [
+                               "UAT",
+                               "Regression",
+                               "API"
+                           ],
+                  "severity":  "normal"
+              },
+    "labels":  [
+                   {
+                       "value":  "Late / Early Policy Master",
+                       "name":  "suite"
+                   },
+                   {
+                       "value":  "Attendance Management API Suite",
+                       "name":  "parentSuite"
+                   },
+                   {
+                       "value":  "Get Policy By ID with Child Entities",
+                       "name":  "subSuite"
+                   },
+                   {
+                       "value":  "Attendance Management",
+                       "name":  "epic"
+                   },
+                   {
+                       "value":  "Late / Early Policy Master",
+                       "name":  "feature"
+                   },
+                   {
+                       "value":  "Get Policy By ID with Child Entities",
+                       "name":  "story"
+                   },
+                   {
+                       "value":  "normal",
+                       "name":  "severity"
+                   },
+                   {
+                       "value":  "HCM-UAT-RUNNER",
+                       "name":  "host"
+                   },
+                   {
+                       "value":  "1",
+                       "name":  "thread"
+                   },
+                   {
+                       "value":  "Bruno / Newman Automation",
+                       "name":  "framework"
+                   },
+                   {
+                       "value":  "Late / Early Policy Master",
+                       "name":  "package"
+                   }
+               ],
+    "fullName":  "Late / Early Policy Master - Get Policy By ID with Child Entities",
+    "status":  "passed",
+    "links":  [
+                  {
+                      "url":  "https://uatmcdphcmplatform.omfysgroup.com",
+                      "name":  "Live UAT Environment",
+                      "type":  "link"
+                  }
+              ],
+    "parameters":  [
+
+                   ],
+    "beforeStages":  [
+
+                     ],
+    "statusDetails":  {
+                          "known":  false,
+                          "message":  "Test executed successfully with expected response",
+                          "flaky":  false,
+                          "muted":  false
+                      }
+}
