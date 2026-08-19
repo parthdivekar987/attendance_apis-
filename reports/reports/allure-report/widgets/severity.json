@@ -1,0 +1,17 @@
+﻿[
+    {
+        "status":  "failed",
+        "count":  7,
+        "severity":  "critical"
+    },
+    {
+        "status":  "failed",
+        "count":  2,
+        "severity":  "normal"
+    },
+    {
+        "status":  "passed",
+        "count":  45,
+        "severity":  "normal"
+    }
+]

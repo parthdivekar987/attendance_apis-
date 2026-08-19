@@ -1,0 +1,22 @@
+﻿[
+    {
+        "count":  22,
+        "status":  "passed"
+    },
+    {
+        "count":  7,
+        "status":  "failed"
+    },
+    {
+        "count":  0,
+        "status":  "broken"
+    },
+    {
+        "count":  0,
+        "status":  "skipped"
+    },
+    {
+        "count":  0,
+        "status":  "unknown"
+    }
+]

@@ -1,0 +1,477 @@
+﻿{
+    "name":  "behaviors",
+    "uid":  "b1",
+    "children":  [
+                     {
+                         "name":  "Late / Early Policy Master",
+                         "children":  [
+                                          {
+                                              "time":  {
+                                                           "duration":  85
+                                                       },
+                                              "status":  "passed",
+                                              "name":  "Create Custom Policy - LEAVE (Happy Path)",
+                                              "uid":  "tc_lep_1"
+                                          },
+                                          {
+                                              "time":  {
+                                                           "duration":  62
+                                                       },
+                                              "status":  "failed",
+                                              "name":  "BUG 6: Quotes-Only Policy Name Fuzzing Defect",
+                                              "uid":  "tc_lep_2",
+                                              "statusMessage":  "Server accepted quotes-only name and returned 201 Created"
+                                          },
+                                          {
+                                              "time":  {
+                                                           "duration":  54
+                                                       },
+                                              "status":  "failed",
+                                              "name":  "BUG 7: Unhandled 500 Entity Leak on Invalid Sort",
+                                              "uid":  "tc_lep_3",
+                                              "statusMessage":  "Server threw unhandled 500 error leaking LateEarlyPolicyMaster"
+                                          },
+                                          {
+                                              "time":  {
+                                                           "duration":  92
+                                                       },
+                                              "status":  "failed",
+                                              "name":  "BUG 8: Status Deactivation Cascade Desynchronization",
+                                              "uid":  "tc_lep_4",
+                                              "statusMessage":  "Parent policy deactivated (N) but child assignments remained active (Y)"
+                                          },
+                                          {
+                                              "time":  {
+                                                           "duration":  74
+                                                       },
+                                              "status":  "failed",
+                                              "name":  "BUG 9: Inactive Leave Type 7 (OD) Gating Failure",
+                                              "uid":  "tc_lep_5",
+                                              "statusMessage":  "Server accepted disabled OD leave, causing blank UI dropdown \u0026 edit failure"
+                                          },
+                                          {
+                                              "time":  {
+                                                           "duration":  48
+                                                       },
+                                              "status":  "passed",
+                                              "name":  "Mathematical Inversion - Grace Exceeds Window",
+                                              "uid":  "tc_lep_6"
+                                          },
+                                          {
+                                              "time":  {
+                                                           "duration":  51
+                                                       },
+                                              "status":  "passed",
+                                              "name":  "Duplicate Priority Order Validation",
+                                              "uid":  "tc_lep_7"
+                                          },
+                                          {
+                                              "time":  {
+                                                           "duration":  65
+                                                       },
+                                              "status":  "passed",
+                                              "name":  "Duplicate Employee Assignment Collision",
+                                              "uid":  "tc_lep_8"
+                                          },
+                                          {
+                                              "time":  {
+                                                           "duration":  92
+                                                       },
+                                              "status":  "passed",
+                                              "name":  "BOLA ID Mismatch \u0026 Full Child Replacement",
+                                              "uid":  "tc_lep_9"
+                                          },
+                                          {
+                                              "time":  {
+                                                           "duration":  43
+                                                       },
+                                              "status":  "passed",
+                                              "name":  "Get Policy By ID with Child Entities",
+                                              "uid":  "tc_lep_10"
+                                          },
+                                          {
+                                              "time":  {
+                                                           "duration":  58
+                                                       },
+                                              "status":  "passed",
+                                              "name":  "Get All Policies Paginated",
+                                              "uid":  "tc_lep_11"
+                                          },
+                                          {
+                                              "time":  {
+                                                           "duration":  81
+                                                       },
+                                              "status":  "passed",
+                                              "name":  "Update Late Early Policy",
+                                              "uid":  "tc_lep_12"
+                                          }
+                                      ]
+                     },
+                     {
+                         "name":  "Status Threshold Master",
+                         "children":  [
+                                          {
+                                              "time":  {
+                                                           "duration":  78
+                                                       },
+                                              "status":  "passed",
+                                              "name":  "Create Status Threshold (Happy Path)",
+                                              "uid":  "tc_th_1"
+                                          },
+                                          {
+                                              "time":  {
+                                                           "duration":  49
+                                                       },
+                                              "status":  "failed",
+                                              "name":  "BUG 1: Unhandled 500 Error on Invalid Sort",
+                                              "uid":  "tc_th_2",
+                                              "statusMessage":  "Leaked AttendanceStatusThresholdMaster with 500 error"
+                                          },
+                                          {
+                                              "time":  {
+                                                           "duration":  66
+                                                       },
+                                              "status":  "failed",
+                                              "name":  "BUG 2: Quotes-Only Threshold Name Accepted",
+                                              "uid":  "tc_th_3",
+                                              "statusMessage":  "Accepted quotes-only string as valid threshold name"
+                                          },
+                                          {
+                                              "time":  {
+                                                           "duration":  88
+                                                       },
+                                              "status":  "failed",
+                                              "name":  "BUG 4: Duplicate Employee Assignment Fan-Out",
+                                              "uid":  "tc_th_4",
+                                              "statusMessage":  "Allowed duplicate employee 3701 in assignments array"
+                                          },
+                                          {
+                                              "time":  {
+                                                           "duration":  71
+                                                       },
+                                              "status":  "failed",
+                                              "name":  "BUG 5: Working Hours Upper Bound Overflow (50.00h)",
+                                              "uid":  "tc_th_5",
+                                              "statusMessage":  "Accepted 50.00 working hours per day (exceeding 24h)"
+                                          },
+                                          {
+                                              "time":  {
+                                                           "duration":  45
+                                                       },
+                                              "status":  "passed",
+                                              "name":  "Get Status Threshold By ID",
+                                              "uid":  "tc_th_6"
+                                          },
+                                          {
+                                              "time":  {
+                                                           "duration":  52
+                                                       },
+                                              "status":  "passed",
+                                              "name":  "Get All Status Thresholds Paginated",
+                                              "uid":  "tc_th_7"
+                                          },
+                                          {
+                                              "time":  {
+                                                           "duration":  77
+                                                       },
+                                              "status":  "passed",
+                                              "name":  "Update Status Threshold",
+                                              "uid":  "tc_th_8"
+                                          },
+                                          {
+                                              "time":  {
+                                                           "duration":  56
+                                                       },
+                                              "status":  "passed",
+                                              "name":  "Change Status Toggle",
+                                              "uid":  "tc_th_9"
+                                          },
+                                          {
+                                              "time":  {
+                                                           "duration":  63
+                                                       },
+                                              "status":  "passed",
+                                              "name":  "Delete Status Threshold",
+                                              "uid":  "tc_th_10"
+                                          }
+                                      ]
+                     },
+                     {
+                         "name":  "Week-Off Policy Master",
+                         "children":  [
+                                          {
+                                              "time":  {
+                                                           "duration":  69
+                                                       },
+                                              "status":  "passed",
+                                              "name":  "Create Week Off Template (Happy Path)",
+                                              "uid":  "tc_wo_1"
+                                          },
+                                          {
+                                              "time":  {
+                                                           "duration":  72
+                                                       },
+                                              "status":  "failed",
+                                              "name":  "BUG 3: Inverted Date Order on Assignment",
+                                              "uid":  "tc_wo_2",
+                                              "statusMessage":  "Accepted effectiveTo (2029-01-01) \u003c effectiveFrom (2029-12-31)"
+                                          },
+                                          {
+                                              "time":  {
+                                                           "duration":  41
+                                                       },
+                                              "status":  "passed",
+                                              "name":  "Get Week Off By ID",
+                                              "uid":  "tc_wo_3"
+                                          },
+                                          {
+                                              "time":  {
+                                                           "duration":  49
+                                                       },
+                                              "status":  "passed",
+                                              "name":  "Get All Week Offs Paginated",
+                                              "uid":  "tc_wo_4"
+                                          },
+                                          {
+                                              "time":  {
+                                                           "duration":  75
+                                                       },
+                                              "status":  "passed",
+                                              "name":  "Update Week Off Template",
+                                              "uid":  "tc_wo_5"
+                                          },
+                                          {
+                                              "time":  {
+                                                           "duration":  53
+                                                       },
+                                              "status":  "passed",
+                                              "name":  "Toggle Week Off Status",
+                                              "uid":  "tc_wo_6"
+                                          }
+                                      ]
+                     },
+                     {
+                         "name":  "Holiday Template Master",
+                         "children":  [
+                                          {
+                                              "time":  {
+                                                           "duration":  70
+                                                       },
+                                              "status":  "passed",
+                                              "name":  "Create Holiday Template (Happy Path)",
+                                              "uid":  "tc_hol_1"
+                                          },
+                                          {
+                                              "time":  {
+                                                           "duration":  42
+                                                       },
+                                              "status":  "passed",
+                                              "name":  "Get Holiday Template By ID",
+                                              "uid":  "tc_hol_2"
+                                          },
+                                          {
+                                              "time":  {
+                                                           "duration":  51
+                                                       },
+                                              "status":  "passed",
+                                              "name":  "Get All Holiday Templates Paginated",
+                                              "uid":  "tc_hol_3"
+                                          },
+                                          {
+                                              "time":  {
+                                                           "duration":  76
+                                                       },
+                                              "status":  "passed",
+                                              "name":  "Update Holiday Template",
+                                              "uid":  "tc_hol_4"
+                                          },
+                                          {
+                                              "time":  {
+                                                           "duration":  55
+                                                       },
+                                              "status":  "passed",
+                                              "name":  "Change Status Toggle",
+                                              "uid":  "tc_hol_5"
+                                          },
+                                          {
+                                              "time":  {
+                                                           "duration":  64
+                                                       },
+                                              "status":  "passed",
+                                              "name":  "Delete Holiday Template",
+                                              "uid":  "tc_hol_6"
+                                          }
+                                      ]
+                     },
+                     {
+                         "name":  "Attendance Policy Master",
+                         "children":  [
+                                          {
+                                              "time":  {
+                                                           "duration":  65
+                                                       },
+                                              "status":  "passed",
+                                              "name":  "Create Attendance Policy (Happy Path)",
+                                              "uid":  "tc_ap_1"
+                                          },
+                                          {
+                                              "time":  {
+                                                           "duration":  48
+                                                       },
+                                              "status":  "passed",
+                                              "name":  "Get All Attendance Policies",
+                                              "uid":  "tc_ap_2"
+                                          },
+                                          {
+                                              "time":  {
+                                                           "duration":  44
+                                                       },
+                                              "status":  "passed",
+                                              "name":  "Get Policy By ID (ID 20)",
+                                              "uid":  "tc_ap_3"
+                                          },
+                                          {
+                                              "time":  {
+                                                           "duration":  73
+                                                       },
+                                              "status":  "passed",
+                                              "name":  "Update Attendance Policy",
+                                              "uid":  "tc_ap_4"
+                                          },
+                                          {
+                                              "time":  {
+                                                           "duration":  52
+                                                       },
+                                              "status":  "passed",
+                                              "name":  "Toggle Policy Status (Deactivate)",
+                                              "uid":  "tc_ap_5"
+                                          },
+                                          {
+                                              "time":  {
+                                                           "duration":  61
+                                                       },
+                                              "status":  "passed",
+                                              "name":  "Delete Policy By ID",
+                                              "uid":  "tc_ap_6"
+                                          },
+                                          {
+                                              "time":  {
+                                                           "duration":  43
+                                                       },
+                                              "status":  "passed",
+                                              "name":  "Duplicate Policy Name Collision (409 Conflict)",
+                                              "uid":  "tc_ap_7"
+                                          },
+                                          {
+                                              "time":  {
+                                                           "duration":  32
+                                                       },
+                                              "status":  "passed",
+                                              "name":  "Description Buffer Overflow (2000 Chars Limit)",
+                                              "uid":  "tc_ap_8"
+                                          },
+                                          {
+                                              "time":  {
+                                                           "duration":  35
+                                                       },
+                                              "status":  "passed",
+                                              "name":  "Security XSS Script Tag Injection Prevention",
+                                              "uid":  "tc_ap_9"
+                                          },
+                                          {
+                                              "time":  {
+                                                           "duration":  43
+                                                       },
+                                              "status":  "passed",
+                                              "name":  "Action Enum Tampering Fuzzing Test",
+                                              "uid":  "tc_ap_10"
+                                          },
+                                          {
+                                              "time":  {
+                                                           "duration":  41
+                                                       },
+                                              "status":  "passed",
+                                              "name":  "Non-Existent Policy Mutation (404 Resilience)",
+                                              "uid":  "tc_ap_11"
+                                          }
+                                      ]
+                     },
+                     {
+                         "name":  "Attendance Shift Master",
+                         "children":  [
+                                          {
+                                              "time":  {
+                                                           "duration":  82
+                                                       },
+                                              "status":  "passed",
+                                              "name":  "Create Default Fixed Shift (Daytime)",
+                                              "uid":  "tc_sh_1"
+                                          },
+                                          {
+                                              "time":  {
+                                                           "duration":  89
+                                                       },
+                                              "status":  "passed",
+                                              "name":  "Create Custom Cross-Midnight Shift (Overnight)",
+                                              "uid":  "tc_sh_2"
+                                          },
+                                          {
+                                              "time":  {
+                                                           "duration":  46
+                                                       },
+                                              "status":  "passed",
+                                              "name":  "Get Shift By ID",
+                                              "uid":  "tc_sh_3"
+                                          },
+                                          {
+                                              "time":  {
+                                                           "duration":  54
+                                                       },
+                                              "status":  "passed",
+                                              "name":  "Get All Shifts Paginated",
+                                              "uid":  "tc_sh_4"
+                                          },
+                                          {
+                                              "time":  {
+                                                           "duration":  79
+                                                       },
+                                              "status":  "passed",
+                                              "name":  "Update Shift By ID",
+                                              "uid":  "tc_sh_5"
+                                          },
+                                          {
+                                              "time":  {
+                                                           "duration":  50
+                                                       },
+                                              "status":  "passed",
+                                              "name":  "Toggle Shift Status (Activate / Deactivate)",
+                                              "uid":  "tc_sh_6"
+                                          },
+                                          {
+                                              "time":  {
+                                                           "duration":  60
+                                                       },
+                                              "status":  "passed",
+                                              "name":  "Delete Shift By ID",
+                                              "uid":  "tc_sh_7"
+                                          },
+                                          {
+                                              "time":  {
+                                                           "duration":  39
+                                                       },
+                                              "status":  "passed",
+                                              "name":  "Shift Name Alphabetic Regex Validation",
+                                              "uid":  "tc_sh_8"
+                                          },
+                                          {
+                                              "time":  {
+                                                           "duration":  68
+                                                       },
+                                              "status":  "passed",
+                                              "name":  "Break Configs Array Mapping Integrity",
+                                              "uid":  "tc_sh_9"
+                                          }
+                                      ]
+                     }
+                 ]
+}

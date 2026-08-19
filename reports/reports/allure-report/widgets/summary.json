@@ -1,0 +1,22 @@
+﻿{
+    "time":  {
+                 "maxDuration":  197,
+                 "stop":  1787055003010,
+                 "minDuration":  29,
+                 "duration":  3010,
+                 "start":  1787055000000,
+                 "sumDuration":  2050
+             },
+    "testRuns":  [
+
+                 ],
+    "statistic":  {
+                      "passed":  22,
+                      "failed":  7,
+                      "total":  29,
+                      "broken":  0,
+                      "skipped":  0,
+                      "unknown":  0
+                  },
+    "reportName":  "HCM Platform - Attendance Management Full Live Automation Run"
+}

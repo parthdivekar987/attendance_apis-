@@ -1,0 +1,58 @@
+﻿{
+    "items":  [
+                  {
+                      "name":  "Late / Early Policy Master",
+                      "uid":  "s1",
+                      "statistic":  {
+                                        "total":  12,
+                                        "failed":  4,
+                                        "passed":  8
+                                    }
+                  },
+                  {
+                      "name":  "Status Threshold Master",
+                      "uid":  "s2",
+                      "statistic":  {
+                                        "total":  10,
+                                        "failed":  4,
+                                        "passed":  6
+                                    }
+                  },
+                  {
+                      "name":  "Week-Off Policy Master",
+                      "uid":  "s3",
+                      "statistic":  {
+                                        "total":  6,
+                                        "failed":  1,
+                                        "passed":  5
+                                    }
+                  },
+                  {
+                      "name":  "Holiday Template Master",
+                      "uid":  "s4",
+                      "statistic":  {
+                                        "total":  6,
+                                        "failed":  0,
+                                        "passed":  6
+                                    }
+                  },
+                  {
+                      "name":  "Attendance Policy Master",
+                      "uid":  "s5",
+                      "statistic":  {
+                                        "total":  11,
+                                        "failed":  0,
+                                        "passed":  11
+                                    }
+                  },
+                  {
+                      "name":  "Attendance Shift Master",
+                      "uid":  "s6",
+                      "statistic":  {
+                                        "total":  9,
+                                        "failed":  0,
+                                        "passed":  9
+                                    }
+                  }
+              ]
+}
