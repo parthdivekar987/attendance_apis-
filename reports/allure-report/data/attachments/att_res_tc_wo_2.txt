@@ -1,0 +1,7 @@
+--- ACTUAL DEFECT RESPONSE ---
+HTTP/1.1 201 Created
+{ 'status': 'success', 'message': 'Week-off assigned successfully' }
+
+--- EXPECTED SPECIFICATION ---
+HTTP/1.1 400 Bad Request
+{ 'status': 'error', 'errorCode': 'INVALID_DATE_RANGE', 'message': 'effectiveTo date must be on or after effectiveFrom date' }

@@ -1,0 +1,2 @@
+POST /api/attendance/status-threshold/create
+Body: { 'thresholdName': 'MultiAssign', 'assignments': [{ 'empId': 3701 }, { 'empId': 3701 }] }

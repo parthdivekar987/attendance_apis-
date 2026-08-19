@@ -1,0 +1,2 @@
+PATCH /api/attendance/late-early-policies/status/toggle
+Body: { 'policyId': 14, 'isActive': 'N' }

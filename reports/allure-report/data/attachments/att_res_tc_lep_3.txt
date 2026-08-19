@@ -1,0 +1,7 @@
+--- ACTUAL DEFECT RESPONSE ---
+HTTP/1.1 500 Internal Server Error
+{ 'status': 500, 'message': 'No property invalidProp found for type LateEarlyPolicyMaster' }
+
+--- EXPECTED SPECIFICATION ---
+HTTP/1.1 400 Bad Request
+{ 'status': 'error', 'errorCode': 'INVALID_SORT_FIELD', 'message': 'Supported sort properties: policyId, policyName, priorityOrder' }

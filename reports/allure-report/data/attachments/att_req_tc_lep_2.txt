@@ -1,0 +1,2 @@
+POST /api/attendance/late-early-policies/create
+Body: { 'policyName': '"""', 'policyType': 'DEDUCTION' }

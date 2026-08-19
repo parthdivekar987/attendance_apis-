@@ -1,0 +1,7 @@
+--- ACTUAL DEFECT RESPONSE ---
+HTTP/1.1 201 Created
+{ 'status': 'success', 'data': { 'assignmentsCreated': 2 } }
+
+--- EXPECTED SPECIFICATION ---
+HTTP/1.1 400 Bad Request
+{ 'status': 'error', 'errorCode': 'DUPLICATE_EMPLOYEE_ASSIGNMENT', 'message': 'Employee 3701 cannot appear multiple times in the assignment roster' }

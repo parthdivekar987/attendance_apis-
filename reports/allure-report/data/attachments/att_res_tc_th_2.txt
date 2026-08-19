@@ -1,0 +1,7 @@
+--- ACTUAL DEFECT RESPONSE ---
+HTTP/1.1 500 Internal Server Error
+{ 'timestamp': '2026-08-19T10:20:15', 'status': 500, 'error': 'Internal Server Error', 'message': 'No property invalidSort found for type AttendanceStatusThresholdMaster' }
+
+--- EXPECTED SPECIFICATION ---
+HTTP/1.1 400 Bad Request
+{ 'status': 'error', 'errorCode': 'INVALID_SORT_FIELD', 'message': 'Sort field invalidSort is not supported. Allowed fields: thresholdId, thresholdName, effectiveFrom' }

@@ -1,0 +1,7 @@
+--- ACTUAL DEFECT RESPONSE ---
+HTTP/1.1 200 OK
+Parent updated to isActive: 'N', but employee assignments remain isActive: 'Y'
+
+--- EXPECTED SPECIFICATION ---
+HTTP/1.1 200 OK
+Parent updated to isActive: 'N' AND all associated employee assignment records cascaded to isActive: 'N'

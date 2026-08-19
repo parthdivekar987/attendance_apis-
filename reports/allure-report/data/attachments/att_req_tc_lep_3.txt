@@ -1,0 +1,2 @@
+GET /api/attendance/late-early-policies/getAll?sort=invalidProp,desc
+Authorization: Bearer <Admin_Token>

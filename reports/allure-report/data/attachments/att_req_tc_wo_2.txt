@@ -1,0 +1,2 @@
+POST /api/attendance/week-offs/assign
+Body: { 'templateId': 12, 'effectiveFrom': '2026-08-30', 'effectiveTo': '2026-08-01' }

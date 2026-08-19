@@ -1,0 +1,7 @@
+--- ACTUAL DEFECT RESPONSE ---
+HTTP/1.1 201 Created
+{ 'status': 'success', 'data': { 'policyId': 19, 'leaveTypeId': 7 } }
+
+--- EXPECTED SPECIFICATION ---
+HTTP/1.1 400 Bad Request
+{ 'status': 'error', 'errorCode': 'INACTIVE_LEAVE_TYPE', 'message': 'Leave type ID 7 (OD) is currently inactive and cannot be assigned' }

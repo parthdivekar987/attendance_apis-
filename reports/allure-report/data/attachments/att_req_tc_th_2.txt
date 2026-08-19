@@ -1,0 +1,2 @@
+GET /api/attendance/status-threshold/getAll?page=0&size=10&sort=invalidSort,asc
+Authorization: Bearer <Admin_Token>

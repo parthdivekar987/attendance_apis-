@@ -1,0 +1,2 @@
+POST /api/attendance/status-threshold/create
+Body: { 'thresholdName': '""', 'workingHours': 8.00 }

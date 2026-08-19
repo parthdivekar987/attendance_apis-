@@ -1,0 +1,7 @@
+--- ACTUAL DEFECT RESPONSE ---
+HTTP/1.1 201 Created
+{ 'status': 'success', 'message': 'Status threshold created successfully', 'data': { 'thresholdId': 45, 'thresholdName': '""' } }
+
+--- EXPECTED SPECIFICATION ---
+HTTP/1.1 400 Bad Request
+{ 'status': 'error', 'errorCode': 'VALIDATION_ERROR', 'message': 'thresholdName must contain valid non-quote alphanumeric characters' }
