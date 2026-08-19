@@ -577,3 +577,46 @@ Body:
 
 Developer Fix Recommendation:
 Whitelist allowed sort columns (`shiftId`, `shiftCode`, `shiftName`, `startTime`, `endTime`, `effectiveFrom`, `effectiveTo`) in the controller layer before constructing the Spring Data `Pageable` object.
+
+
+--------------------------------------------------------------------------------
+BUG-HCM-ATT-012: [Attendance Policy Master] [POST /create - Concurrency Race Condition] Time-of-Check to Time-of-Use (TOCTOU) Race Condition Allows Duplicate Unique Policy Names
+--------------------------------------------------------------------------------
+API Module: Attendance Policy Master
+API Endpoint: POST /api/attendancepolicy
+HTTP Method: POST
+UI Navigation Path: Attendance Management -> Attendance Policy -> Create Policy (Simultaneous Submissions)
+
+Technical & Business Root Cause Explanation:
+The uniqueness validation for policyName is performed via an application-level pre-check (indByPolicyName()) rather than relying on an atomic database unique constraint or pessimistic row-level locking (SELECT ... FOR UPDATE). When 10 simultaneous threads submitted the exact same policy name (ConcurrentRacePolicyMXIACC) at the exact same millisecond, two separate threads bypassed the uniqueness check before either committed, resulting in 2 duplicate records being created (201 Created) with identical names.
+
+Request Body:
+{
+  "policyName": "ConcurrentRacePolicyMXIACC",
+  "policyHeading": "Race Heading",
+  "policyDescription": "Testing simultaneous creation race condition"
+}
+
+Actual Response:
+Status: 201 Created (Returned for 2 out of 10 simultaneous requests)
+Body:
+{
+  "status": "success",
+  "message": "Attendance policy created successfully",
+  "data": { "policyId": 23 }
+}
+(Duplicate record with policyId 24 created with the exact same name)
+
+Expected Response:
+Status: 409 Conflict (For 9 out of 10 requests)
+Body:
+{
+  "status": "error",
+  "errorCode": "DUPLICATE_ENTITY",
+  "message": "Attendance policy already exists with name: ConcurrentRacePolicyMXIACC"
+}
+
+Developer Fix Recommendation:
+1. Add a unique database constraint on ttendance_policy.policy_name:
+   ALTER TABLE attendance_policy ADD CONSTRAINT uk_policy_name UNIQUE (policy_name);
+2. Catch DataIntegrityViolationException in Spring Boot service and map to HTTP 409 Conflict.
