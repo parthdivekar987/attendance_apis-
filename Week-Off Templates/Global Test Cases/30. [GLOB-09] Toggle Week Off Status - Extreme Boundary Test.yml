@@ -1,0 +1,16 @@
+﻿meta {
+  name: 30. [GLOB-09] Toggle Week Off Status - Extreme Boundary Limit Test
+  type: http
+  seq: 30
+}
+
+patch {
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/week-offs/actDeact/134/status
+  body: none
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{authToken}}
+  Content-Type: application/json
+}

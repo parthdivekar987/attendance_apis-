@@ -6,11 +6,18 @@ info:
 http:
   method: PATCH
   url: https://uatmcdphcmplatform.omfysgroup.com/api/attendancepolicy/20/status?action=TAMPERED_ACTION_PROBE
+  headers:
+    - name: Authorization
+      value: Bearer{{authToken}}
+    - name: Content-Type
+      value: application/json
   params:
     - name: action
       value: TAMPERED_ACTION_PROBE
       type: query
-  auth: inherit
+  auth:
+    type: bearer
+    token: "{{authToken}}"
 
 settings:
   encodeUrl: true

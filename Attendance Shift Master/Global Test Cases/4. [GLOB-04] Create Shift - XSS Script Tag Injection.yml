@@ -1,0 +1,40 @@
+﻿meta {
+  name: 4. [GLOB-04] Create Shift - XSS Script Tag Injection (400)
+  type: http
+  seq: 4
+}
+
+post {
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/v1/attendance/shift/master
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{authToken}}
+  Content-Type: application/json
+}
+
+body:json {
+{
+    "shiftCode":  "SHF_GLOB_01",
+    "shiftType":  "FIXED",
+    "effectiveFrom":  "01-Aug-2026",
+    "shiftName":  "Global Standard Shift Alpha",
+    "applicableEmpIds":  null,
+    "description":  "\u003cscript\u003ealert(\u0027XSS\u0027)\u003c/script\u003e",
+    "isDeleted":  "N",
+    "startTime":  "09:00:00",
+    "endTime":  "18:00:00",
+    "breakConfigs":  [
+                         {
+                             "paidFlag":  false,
+                             "breakName":  "Lunch Break",
+                             "breakDurationMinutes":  60
+                         }
+                     ],
+    "applicabilityType":  "DEFAULT",
+    "effectiveTo":  "31-Dec-2026",
+    "remarks":  "\u003cscript\u003ealert(\u0027XSS\u0027)\u003c/script\u003e"
+}
+}

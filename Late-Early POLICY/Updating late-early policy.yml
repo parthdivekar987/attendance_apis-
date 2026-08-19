@@ -5,8 +5,53 @@ info:
 
 http:
   method: PUT
-  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/late-early-policies/update/138
-  auth: inherit
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/late-early-policies/update/152
+  headers:
+    - name: Authorization
+      value: bearer {{authToken}}
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |
+      {
+        "policyId": 138,
+        "policyCode": "LEP00137",
+        "policyName": "Updated Late Early Policy 2027",
+        "description": "Updated policy configuration and deduction rules",
+        "templateMode": "CUSTOM",
+        "eventCountMinutes": 30,
+        "graceMinutes": 10,
+        "graceEvent": 2,
+        "allowedEvent": 3,
+        "deductionType": "LEAVE",
+        "leaveDeductDays": 1.00,
+        "leaveTypeId": 1,
+        "fineAmount": null,
+        "effectiveFrom": "2027-01-01",
+        "effectiveTo": "2027-12-31",
+        "isDefault": "N",
+        "isActive": "Y",
+        "remarks": "Updated via API test suite",
+        "deductionPriorities": [
+          {
+            "priorityOrder": 1,
+            "leaveTypeId": 1,
+            "isActive": "Y"
+          }
+        ],
+        "assignments": [
+          {
+            "employeeId": 4222,
+            "effectiveFrom": "2027-01-01",
+            "effectiveTo": "2027-12-31",
+            "isActive": "Y"
+          }
+        ]
+      }
+  auth:
+    type: bearer
+    token: "{{authToken}}"
 
 settings:
   encodeUrl: true

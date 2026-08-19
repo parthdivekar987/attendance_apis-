@@ -1,0 +1,42 @@
+﻿meta {
+  name: 20. [GLOB-02] Update Threshold - Invalid Bearer Token (401)
+  type: http
+  seq: 20
+}
+
+put {
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/status-threshold/update/80
+  body:json {
+{
+    "thresholdName":  "Global Update Threshold",
+    "effectiveFrom":  "2027-06-01",
+    "halfDayMinHours":  3.01,
+    "fullDayMinHours":  6,
+    "isActive":  "Y",
+    "templateStatus":  "DRAFT",
+    "absentMaxHours":  3,
+    "presentMinHours":  8,
+    "description":  "Global",
+    "templateMode":  "CUSTOM",
+    "shiftTypeApplicability":  "Fixed",
+    "assignments":  [
+                        {
+                            "effectiveFrom":  "2027-06-01",
+                            "employeeId":  34,
+                            "effectiveTo":  "2027-12-31",
+                            "isActive":  "Y"
+                        }
+                    ],
+    "effectiveTo":  "2027-12-31",
+    "isDefault":  "N",
+    "remarks":  "Global",
+    "thresholdCode":  "TH00079"
+}
+}
+  auth: none
+}
+
+headers {
+  Authorization: Bearer invalid_expired_mock_jwt_token_12345
+  Content-Type: application/json
+}

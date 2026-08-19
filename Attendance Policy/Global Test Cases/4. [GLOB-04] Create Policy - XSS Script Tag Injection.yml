@@ -1,0 +1,24 @@
+﻿meta {
+  name: 4. [GLOB-04] Create Policy - XSS Script Tag Injection (400)
+  type: http
+  seq: 4
+}
+
+post {
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendancepolicy
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{authToken}}
+  Content-Type: application/json
+}
+
+body:json {
+{
+    "policyName":  "Global Standard Policy Alpha",
+    "policyDescription":  "Global standard attendance compliance",
+    "policyHeading":  "\u003cscript\u003ealert(\u0027XSS\u0027)\u003c/script\u003e"
+}
+}

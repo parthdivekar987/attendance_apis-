@@ -1,0 +1,16 @@
+﻿meta {
+  name: 11. [GLOB-08] Get All Policies - Malformed Request Boundary (400)
+  type: http
+  seq: 11
+}
+
+get {
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/late-early-policies/getAll?page=0&size=10&sort=policyId,desc
+  body: none
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{authToken}}
+  Content-Type: application/json
+}

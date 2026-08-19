@@ -1,0 +1,15 @@
+﻿meta {
+  name: 34. [GLOB-07] Delete Policy - Negative ID -1 Validation
+  type: http
+  seq: 34
+}
+
+delete {
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendancepolicy/-1
+  body: none
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{authToken}}
+}

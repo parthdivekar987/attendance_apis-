@@ -1,0 +1,16 @@
+﻿meta {
+  name: 26. [GLOB-02] Toggle Policy Status - Invalid Bearer Token (401)
+  type: http
+  seq: 26
+}
+
+patch {
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendancepolicy/20/status?action=DEACTIVATE
+  body: none
+  auth: none
+}
+
+headers {
+  Authorization: Bearer invalid_expired_mock_jwt_token_12345
+  Content-Type: application/json
+}

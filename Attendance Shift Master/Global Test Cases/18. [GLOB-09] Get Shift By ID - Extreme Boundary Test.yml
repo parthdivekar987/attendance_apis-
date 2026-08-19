@@ -1,0 +1,16 @@
+﻿meta {
+  name: 18. [GLOB-09] Get Shift By ID - Extreme Boundary Limit Test
+  type: http
+  seq: 18
+}
+
+get {
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/v1/attendance/shift/master/61
+  body: none
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{authToken}}
+  Content-Type: application/json
+}

@@ -1,0 +1,41 @@
+﻿meta {
+  name: 20. [GLOB-02] Update Week Off - Invalid Bearer Token (401)
+  type: http
+  seq: 20
+}
+
+put {
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/week-offs/update/134
+  body:json {
+{
+    "assignments":  [
+                        {
+                            "employeeId":  34,
+                            "effectiveFrom":  "2029-01-01",
+                            "departmentId":  1,
+                            "effectiveTo":  "2029-12-31",
+                            "locationId":  1,
+                            "isActive":  "Y"
+                        }
+                    ],
+    "description":  "Global",
+    "details":  [
+                    {
+                        "isWeekOff":  "Y",
+                        "weekNo":  1,
+                        "dayOfWeek":  "SUNDAY"
+                    }
+                ],
+    "isDefault":  "N",
+    "weekOffName":  "Global Updated Week Off",
+    "optionModel":  "ALLOWED",
+    "isActive":  "Y"
+}
+}
+  auth: none
+}
+
+headers {
+  Authorization: Bearer invalid_expired_mock_jwt_token_12345
+  Content-Type: application/json
+}

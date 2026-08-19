@@ -1,0 +1,36 @@
+﻿meta {
+  name: 1. [GLOB-01] Create Week Off - Missing Auth Token (401)
+  type: http
+  seq: 1
+}
+
+post {
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/week-offs/create
+  body:json {
+{
+    "assignments":  [
+                        {
+                            "employeeId":  34,
+                            "effectiveFrom":  "2044-01-01",
+                            "departmentId":  1,
+                            "effectiveTo":  "2044-12-31",
+                            "locationId":  1,
+                            "isActive":  "Y"
+                        }
+                    ],
+    "description":  "Global",
+    "details":  [
+                    {
+                        "isWeekOff":  "Y",
+                        "weekNo":  1,
+                        "dayOfWeek":  "SUNDAY"
+                    }
+                ],
+    "isDefault":  "N",
+    "weekOffName":  "Global Week Off Policy",
+    "optionModel":  "ALLOWED",
+    "isActive":  "Y"
+}
+}
+  auth: none
+}

@@ -1,0 +1,16 @@
+﻿meta {
+  name: 14. [GLOB-02] Get Shift By ID - Invalid Bearer Token (401)
+  type: http
+  seq: 14
+}
+
+get {
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/v1/attendance/shift/master/61
+  body: none
+  auth: none
+}
+
+headers {
+  Authorization: Bearer invalid_expired_mock_jwt_token_12345
+  Content-Type: application/json
+}

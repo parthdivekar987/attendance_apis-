@@ -1,0 +1,11 @@
+﻿meta {
+  name: 31. [GLOB-01] Delete Threshold - Missing Auth Token (401)
+  type: http
+  seq: 31
+}
+
+delete {
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/status-threshold/delete/80
+  body: none
+  auth: none
+}

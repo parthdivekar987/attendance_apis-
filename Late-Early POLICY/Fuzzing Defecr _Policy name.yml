@@ -6,7 +6,42 @@ info:
 http:
   method: POST
   url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/late-early-policies/create
-  auth: inherit
+  headers:
+    - name: Authorization
+      value: bearer{{authToken}}
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |
+      {
+        "policyCode": null,
+        "policyName":  "\"\"\"\"\"\"",
+        "description": "Testing quotes-only policy name fuzzing acceptance",
+        "templateMode": "CUSTOM",
+        "eventCountMinutes": 30,
+        "graceMinutes": 10,
+        "graceEvent": 2,
+        "allowedEvent": 3,
+        "deductionType": "LEAVE",
+        "leaveDeductDays": 0.50,
+        "leaveTypeId": 1,
+        "effectiveFrom": "2027-01-01",
+        "effectiveTo": "2027-12-31",
+        "isDefault": "N",
+        "isActive": "Y",
+          "assignments": [
+          {
+            "employeeId": 3503,
+            "effectiveFrom": "2027-01-01",
+            "effectiveTo": "2027-12-31",
+            "isActive": "Y"
+          }
+        ]
+      }
+  auth:
+    type: bearer
+    token: "{{authToken}}"
 
 settings:
   encodeUrl: true

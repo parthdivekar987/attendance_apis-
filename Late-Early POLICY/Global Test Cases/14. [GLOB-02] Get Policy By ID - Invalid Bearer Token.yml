@@ -1,0 +1,16 @@
+﻿meta {
+  name: 14. [GLOB-02] Get Policy By ID - Invalid Bearer Token (401)
+  type: http
+  seq: 14
+}
+
+get {
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/late-early-policies/getById/138
+  body: none
+  auth: none
+}
+
+headers {
+  Authorization: Bearer invalid_expired_mock_jwt_token_12345
+  Content-Type: application/json
+}

@@ -6,6 +6,11 @@ info:
 http:
   method: GET
   url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/late-early-policies/getAll?page=0&size=10&sort=non_existent_column,desc
+  headers:
+    - name: Authorization
+      value: Bearer{{authToken}}
+    - name: Content-Type
+      value: application/json
   params:
     - name: page
       value: "0"
@@ -16,7 +21,9 @@ http:
     - name: sort
       value: non_existent_column,desc
       type: query
-  auth: inherit
+  auth:
+    type: bearer
+    token: "{{authToken}}"
 
 settings:
   encodeUrl: true

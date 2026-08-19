@@ -1,0 +1,16 @@
+﻿meta {
+  name: 24. [GLOB-09] Update Week Off - Extreme Boundary Limit Test
+  type: http
+  seq: 24
+}
+
+put {
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/week-offs/update/134
+  body: none
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{authToken}}
+  Content-Type: application/json
+}

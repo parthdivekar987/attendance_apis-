@@ -1,0 +1,15 @@
+﻿meta {
+  name: 27. [GLOB-05] Change Threshold Status - Non-Existent ID 999999 (404)
+  type: http
+  seq: 27
+}
+
+patch {
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/status-threshold/999999/status?status=N
+  body: none
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{authToken}}
+}

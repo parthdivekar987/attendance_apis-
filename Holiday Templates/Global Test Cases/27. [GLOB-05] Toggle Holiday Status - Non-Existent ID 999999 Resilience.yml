@@ -1,0 +1,15 @@
+﻿meta {
+  name: 27. [GLOB-05] Toggle Holiday Status - Non-Existent ID 999999 (404)
+  type: http
+  seq: 27
+}
+
+patch {
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/holiday-templates/999999/status?status=N
+  body: none
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{authToken}}
+}

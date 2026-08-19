@@ -1,0 +1,38 @@
+﻿meta {
+  name: 19. [GLOB-01] Update Policy - Missing Auth Token (401)
+  type: http
+  seq: 19
+}
+
+put {
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/late-early-policies/update/138
+  body:json {
+{
+    "policyId":  138,
+    "effectiveFrom":  "2027-01-01",
+    "graceEvent":  2,
+    "effectiveTo":  "2027-12-31",
+    "isDefault":  "N",
+    "policyName":  "Global Update LEP",
+    "isActive":  "Y",
+    "assignments":  [
+                        {
+                            "effectiveFrom":  "2027-01-01",
+                            "employeeId":  34,
+                            "effectiveTo":  "2027-12-31",
+                            "isActive":  "Y"
+                        }
+                    ],
+    "graceMinutes":  10,
+    "description":  "Global",
+    "deductionType":  "LEAVE",
+    "policyCode":  "LEP00137",
+    "eventCountMinutes":  30,
+    "leaveTypeId":  1,
+    "allowedEvent":  3,
+    "templateMode":  "CUSTOM",
+    "leaveDeductDays":  0.5
+}
+}
+  auth: none
+}

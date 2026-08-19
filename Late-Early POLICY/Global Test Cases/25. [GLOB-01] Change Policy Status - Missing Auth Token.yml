@@ -1,0 +1,11 @@
+﻿meta {
+  name: 25. [GLOB-01] Change Policy Status - Missing Auth Token (401)
+  type: http
+  seq: 25
+}
+
+patch {
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/late-early-policies/138/status?status=N
+  body: none
+  auth: none
+}

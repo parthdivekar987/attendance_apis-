@@ -1,0 +1,15 @@
+﻿meta {
+  name: 28. [GLOB-07] Toggle Holiday Status - Negative ID -1 Validation
+  type: http
+  seq: 28
+}
+
+patch {
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/holiday-templates/-1/status?status=N
+  body: none
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{authToken}}
+}

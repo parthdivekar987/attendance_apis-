@@ -1,0 +1,43 @@
+﻿meta {
+  name: 22. [GLOB-04] Update Week Off - XSS Script Tag Injection (400)
+  type: http
+  seq: 22
+}
+
+put {
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/week-offs/update/134
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{authToken}}
+  Content-Type: application/json
+}
+
+body:json {
+{
+    "weekOffName":  "Global Updated Week Off",
+    "isDefault":  "N",
+    "isActive":  "Y",
+    "details":  [
+                    {
+                        "isWeekOff":  "Y",
+                        "weekNo":  1,
+                        "dayOfWeek":  "SUNDAY"
+                    }
+                ],
+    "description":  "\u003cscript\u003ealert(\u0027XSS\u0027)\u003c/script\u003e",
+    "assignments":  [
+                        {
+                            "employeeId":  34,
+                            "effectiveFrom":  "2029-01-01",
+                            "departmentId":  1,
+                            "effectiveTo":  "2029-12-31",
+                            "locationId":  1,
+                            "isActive":  "Y"
+                        }
+                    ],
+    "optionModel":  "ALLOWED"
+}
+}

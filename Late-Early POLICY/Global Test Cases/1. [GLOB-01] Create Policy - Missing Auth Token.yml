@@ -1,0 +1,37 @@
+﻿meta {
+  name: 1. [GLOB-01] Create Policy - Missing Auth Token (401)
+  type: http
+  seq: 1
+}
+
+post {
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/late-early-policies/create
+  body:json {
+{
+    "leaveTypeId":  1,
+    "graceMinutes":  10,
+    "graceEvent":  2,
+    "effectiveFrom":  "2042-01-01",
+    "assignments":  [
+                        {
+                            "effectiveFrom":  "2042-01-01",
+                            "employeeId":  34,
+                            "effectiveTo":  "2042-12-31",
+                            "isActive":  "Y"
+                        }
+                    ],
+    "isActive":  "Y",
+    "allowedEvent":  3,
+    "policyName":  "Global Late Early Policy",
+    "deductionType":  "LEAVE",
+    "description":  "Global Late Early",
+    "templateMode":  "CUSTOM",
+    "isDefault":  "N",
+    "leaveDeductDays":  0.5,
+    "effectiveTo":  "2042-12-31",
+    "eventCountMinutes":  30,
+    "policyCode":  null
+}
+}
+  auth: none
+}

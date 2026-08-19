@@ -1,0 +1,11 @@
+﻿meta {
+  name: 25. [GLOB-01] Toggle Shift Status - Missing Auth Token (401)
+  type: http
+  seq: 25
+}
+
+patch {
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/v1/attendance/shift/master/status/61?action=DEACTIVATE
+  body: none
+  auth: none
+}

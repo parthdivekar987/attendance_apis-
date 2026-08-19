@@ -1,0 +1,44 @@
+﻿meta {
+  name: 4. [GLOB-04] Create Threshold - XSS Script Tag Injection (400)
+  type: http
+  seq: 4
+}
+
+post {
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/status-threshold/create
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{authToken}}
+  Content-Type: application/json
+}
+
+body:json {
+{
+    "thresholdName":  "Global Threshold",
+    "effectiveFrom":  "2043-01-01",
+    "absentMaxHours":  3,
+    "remarks":  "\u003cscript\u003ealert(\u0027XSS\u0027)\u003c/script\u003e",
+    "effectiveTo":  "2043-12-31",
+    "presentMinHours":  8,
+    "isDefault":  "N",
+    "isActive":  "Y",
+    "assignments":  [
+                        {
+                            "effectiveFrom":  "2043-01-01",
+                            "employeeId":  34,
+                            "effectiveTo":  "2043-12-31",
+                            "isActive":  "Y"
+                        }
+                    ],
+    "description":  "\u003cscript\u003ealert(\u0027XSS\u0027)\u003c/script\u003e",
+    "halfDayMinHours":  3.01,
+    "fullDayMinHours":  6,
+    "thresholdCode":  "TH_GLOB",
+    "shiftTypeApplicability":  "Fixed",
+    "templateMode":  "CUSTOM",
+    "templateStatus":  "DRAFT"
+}
+}

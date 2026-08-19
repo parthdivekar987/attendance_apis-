@@ -1,0 +1,43 @@
+﻿meta {
+  name: 3. [GLOB-03] Create Holiday Template - Quotes Fuzzing Defect Probe
+  type: http
+  seq: 3
+}
+
+post {
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/holiday-templates/create
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{authToken}}
+  Content-Type: application/json
+}
+
+body:json {
+{
+    "assignments":  [
+                        {
+                            "effectiveFrom":  "2045-01-01",
+                            "employeeId":  34,
+                            "effectiveTo":  "2045-12-31",
+                            "isActive":  "Y"
+                        }
+                    ],
+    "description":  "Global",
+    "effectiveFrom":  "2045-01-01",
+    "templateMode":  "CUSTOM",
+    "holidays":  [
+                     {
+                         "holidayName":  "Global Holiday",
+                         "isOptional":  "N",
+                         "holidayDate":  "2045-08-15"
+                     }
+                 ],
+    "holidayTemplateName":  "\"\"\"\"",
+    "isActive":  "Y",
+    "isDefault":  "N",
+    "effectiveTo":  "2045-12-31"
+}
+}

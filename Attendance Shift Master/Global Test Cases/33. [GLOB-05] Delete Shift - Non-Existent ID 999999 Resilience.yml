@@ -1,0 +1,15 @@
+﻿meta {
+  name: 33. [GLOB-05] Delete Shift - Non-Existent ID 999999 (404)
+  type: http
+  seq: 33
+}
+
+delete {
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/v1/attendance/shift/master/999999
+  body: none
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{authToken}}
+}

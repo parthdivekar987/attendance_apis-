@@ -6,6 +6,19 @@ info:
 http:
   method: POST
   url: https://uatmcdphcmplatform.omfysgroup.com/api/attendancepolicy
+  headers:
+    - name: Authorization
+      value: Bearer {{authToken}}
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |
+      {
+        "policyName": "LeaveAttendance",
+        "policyHeading": "Leave and Attendance Rule",
+        "policyDescription": "Testing duplicate policy name creation without uniqueness gating."
+      }
   auth: inherit
 
 settings:

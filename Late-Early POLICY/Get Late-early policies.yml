@@ -5,8 +5,15 @@ info:
 
 http:
   method: GET
-  url: " https://uatmcdphcmplatform.omfysgroup.com/api/attendance/late-early-policies/getById/138"
-  auth: inherit
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/late-early-policies/getById/152
+  headers:
+    - name: Authorization
+      value: Bearer {{authToken}}
+    - name: Content-Type
+      value: application/json
+  auth:
+    type: bearer
+    token: "{{authToken}}"
 
 settings:
   encodeUrl: true

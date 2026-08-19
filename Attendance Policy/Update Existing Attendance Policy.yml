@@ -6,7 +6,22 @@ info:
 http:
   method: PUT
   url: https://uatmcdphcmplatform.omfysgroup.com/api/attendancepolicy/20
-  auth: inherit
+  headers:
+    - name: Authorization
+      value: bearer{{authToken}}
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |
+      {
+        "policyName": "Leave and Attendance Guidelines",
+        "policyHeading": "Updated Operational Attendance Rule",
+        "policyDescription": "Updated policy rules covering working hours, late arrivals, and attendance regularizations."
+      }
+  auth:
+    type: bearer
+    token: "{{authToken}}"
 
 settings:
   encodeUrl: true

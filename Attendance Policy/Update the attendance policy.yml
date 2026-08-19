@@ -6,11 +6,26 @@ info:
 http:
   method: PATCH
   url: https://uatmcdphcmplatform.omfysgroup.com/api/attendancepolicy/20/status?action=DEACTIVATE
+  headers:
+    - name: Authorization
+      value: Bearer{{authToken}}
+    - name: Content-Type
+      value: application/json
   params:
     - name: action
       value: DEACTIVATE
       type: query
-  auth: inherit
+  body:
+    type: json
+    data: |
+      {
+        "status": "success",
+        "message": "Attendance policy deactivated successfully",
+        "timestamp": "18-Aug-2026 T16:37:00"
+      }
+  auth:
+    type: bearer
+    token: "{{authToken}}"
 
 settings:
   encodeUrl: true

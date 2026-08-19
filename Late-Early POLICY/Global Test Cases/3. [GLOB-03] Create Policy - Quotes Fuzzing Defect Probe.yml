@@ -1,0 +1,44 @@
+﻿meta {
+  name: 3. [GLOB-03] Create Policy - Quotes Fuzzing Defect Probe
+  type: http
+  seq: 3
+}
+
+post {
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/late-early-policies/create
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{authToken}}
+  Content-Type: application/json
+}
+
+body:json {
+{
+    "effectiveFrom":  "2042-01-01",
+    "graceEvent":  2,
+    "effectiveTo":  "2042-12-31",
+    "isDefault":  "N",
+    "policyName":  "\"\"\"\"\"\"",
+    "isActive":  "Y",
+    "assignments":  [
+                        {
+                            "effectiveFrom":  "2042-01-01",
+                            "employeeId":  34,
+                            "effectiveTo":  "2042-12-31",
+                            "isActive":  "Y"
+                        }
+                    ],
+    "graceMinutes":  10,
+    "description":  "Global Late Early",
+    "deductionType":  "LEAVE",
+    "policyCode":  null,
+    "eventCountMinutes":  30,
+    "leaveTypeId":  1,
+    "allowedEvent":  3,
+    "templateMode":  "CUSTOM",
+    "leaveDeductDays":  0.5
+}
+}

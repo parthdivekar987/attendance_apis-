@@ -1,0 +1,36 @@
+﻿meta {
+  name: 19. [GLOB-01] Update Week Off - Missing Auth Token (401)
+  type: http
+  seq: 19
+}
+
+put {
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/week-offs/update/134
+  body:json {
+{
+    "assignments":  [
+                        {
+                            "employeeId":  34,
+                            "effectiveFrom":  "2029-01-01",
+                            "departmentId":  1,
+                            "effectiveTo":  "2029-12-31",
+                            "locationId":  1,
+                            "isActive":  "Y"
+                        }
+                    ],
+    "description":  "Global",
+    "details":  [
+                    {
+                        "isWeekOff":  "Y",
+                        "weekNo":  1,
+                        "dayOfWeek":  "SUNDAY"
+                    }
+                ],
+    "isDefault":  "N",
+    "weekOffName":  "Global Updated Week Off",
+    "optionModel":  "ALLOWED",
+    "isActive":  "Y"
+}
+}
+  auth: none
+}

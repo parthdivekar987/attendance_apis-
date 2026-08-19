@@ -6,7 +6,14 @@ info:
 http:
   method: GET
   url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/late-early-policies/getById/138
-  auth: inherit
+  headers:
+    - name: Authorization
+      value: bearer{{authToken}}
+    - name: Content-Type
+      value: application/json
+  auth:
+    type: bearer
+    token: "{{authToken}}"
 
 settings:
   encodeUrl: true

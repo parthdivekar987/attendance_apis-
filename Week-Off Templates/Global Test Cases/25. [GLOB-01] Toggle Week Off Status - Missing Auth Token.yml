@@ -1,0 +1,11 @@
+﻿meta {
+  name: 25. [GLOB-01] Toggle Week Off Status - Missing Auth Token (401)
+  type: http
+  seq: 25
+}
+
+patch {
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/week-offs/actDeact/134/status
+  body: none
+  auth: none
+}

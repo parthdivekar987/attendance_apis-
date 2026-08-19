@@ -1,0 +1,11 @@
+﻿meta {
+  name: 7. [GLOB-01] Get All Week Offs - Missing Auth Token (401)
+  type: http
+  seq: 7
+}
+
+get {
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/week-offs/getAll?page=0&size=10&sort=weekOffName,asc
+  body: none
+  auth: none
+}

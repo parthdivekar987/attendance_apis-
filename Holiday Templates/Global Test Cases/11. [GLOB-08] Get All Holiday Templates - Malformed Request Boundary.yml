@@ -1,0 +1,16 @@
+﻿meta {
+  name: 11. [GLOB-08] Get All Holiday Templates - Malformed Request Boundary (400)
+  type: http
+  seq: 11
+}
+
+get {
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/holiday-templates/getAll?page=0&size=10
+  body: none
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{authToken}}
+  Content-Type: application/json
+}

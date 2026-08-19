@@ -1,0 +1,43 @@
+﻿meta {
+  name: 21. [GLOB-03] Update Week Off - Quotes Fuzzing Defect Probe
+  type: http
+  seq: 21
+}
+
+put {
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/week-offs/update/134
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{authToken}}
+  Content-Type: application/json
+}
+
+body:json {
+{
+    "weekOffName":  "\"\"\"\"",
+    "isDefault":  "N",
+    "isActive":  "Y",
+    "details":  [
+                    {
+                        "isWeekOff":  "Y",
+                        "weekNo":  1,
+                        "dayOfWeek":  "SUNDAY"
+                    }
+                ],
+    "description":  "Global",
+    "assignments":  [
+                        {
+                            "employeeId":  34,
+                            "effectiveFrom":  "2029-01-01",
+                            "departmentId":  1,
+                            "effectiveTo":  "2029-12-31",
+                            "locationId":  1,
+                            "isActive":  "Y"
+                        }
+                    ],
+    "optionModel":  "ALLOWED"
+}
+}

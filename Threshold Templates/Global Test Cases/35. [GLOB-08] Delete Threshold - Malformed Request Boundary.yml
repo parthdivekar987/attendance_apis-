@@ -1,0 +1,16 @@
+﻿meta {
+  name: 35. [GLOB-08] Delete Threshold - Malformed Request Boundary (400)
+  type: http
+  seq: 35
+}
+
+delete {
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/status-threshold/delete/80
+  body: none
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{authToken}}
+  Content-Type: application/json
+}

@@ -1,0 +1,43 @@
+﻿meta {
+  name: 4. [GLOB-04] Create Holiday Template - XSS Script Tag Injection (400)
+  type: http
+  seq: 4
+}
+
+post {
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/holiday-templates/create
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{authToken}}
+  Content-Type: application/json
+}
+
+body:json {
+{
+    "assignments":  [
+                        {
+                            "effectiveFrom":  "2045-01-01",
+                            "employeeId":  34,
+                            "effectiveTo":  "2045-12-31",
+                            "isActive":  "Y"
+                        }
+                    ],
+    "description":  "\u003cscript\u003ealert(\u0027XSS\u0027)\u003c/script\u003e",
+    "effectiveFrom":  "2045-01-01",
+    "templateMode":  "CUSTOM",
+    "holidays":  [
+                     {
+                         "holidayName":  "Global Holiday",
+                         "isOptional":  "N",
+                         "holidayDate":  "2045-08-15"
+                     }
+                 ],
+    "holidayTemplateName":  "Global Holiday Template",
+    "isActive":  "Y",
+    "isDefault":  "N",
+    "effectiveTo":  "2045-12-31"
+}
+}

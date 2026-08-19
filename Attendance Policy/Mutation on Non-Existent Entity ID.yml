@@ -6,7 +6,22 @@ info:
 http:
   method: PUT
   url: https://uatmcdphcmplatform.omfysgroup.com/api/attendancepolicy/999999
-  auth: inherit
+  headers:
+    - name: Authorization
+      value: bearer{{authToken}}
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |
+      {
+        "policyName": "Ghost Entity Update",
+        "policyHeading": "Non Existent Policy Record",
+        "policyDescription": "Testing entity lookup resilience on non-existent policy identifier."
+      }
+  auth:
+    type: bearer
+    token: "{{authToken}}"
 
 settings:
   encodeUrl: true

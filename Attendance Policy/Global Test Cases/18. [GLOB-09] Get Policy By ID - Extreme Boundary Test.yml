@@ -1,0 +1,16 @@
+﻿meta {
+  name: 18. [GLOB-09] Get Policy By ID - Extreme Boundary Limit Test
+  type: http
+  seq: 18
+}
+
+get {
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendancepolicy/20
+  body: none
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{authToken}}
+  Content-Type: application/json
+}

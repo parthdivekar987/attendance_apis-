@@ -1,0 +1,37 @@
+﻿meta {
+  name: 19. [GLOB-01] Update Threshold - Missing Auth Token (401)
+  type: http
+  seq: 19
+}
+
+put {
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/status-threshold/update/80
+  body:json {
+{
+    "thresholdName":  "Global Update Threshold",
+    "effectiveFrom":  "2027-06-01",
+    "halfDayMinHours":  3.01,
+    "fullDayMinHours":  6,
+    "isActive":  "Y",
+    "templateStatus":  "DRAFT",
+    "absentMaxHours":  3,
+    "presentMinHours":  8,
+    "description":  "Global",
+    "templateMode":  "CUSTOM",
+    "shiftTypeApplicability":  "Fixed",
+    "assignments":  [
+                        {
+                            "effectiveFrom":  "2027-06-01",
+                            "employeeId":  34,
+                            "effectiveTo":  "2027-12-31",
+                            "isActive":  "Y"
+                        }
+                    ],
+    "effectiveTo":  "2027-12-31",
+    "isDefault":  "N",
+    "remarks":  "Global",
+    "thresholdCode":  "TH00079"
+}
+}
+  auth: none
+}

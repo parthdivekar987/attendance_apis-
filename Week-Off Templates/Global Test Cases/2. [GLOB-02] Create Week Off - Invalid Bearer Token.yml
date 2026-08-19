@@ -1,0 +1,41 @@
+﻿meta {
+  name: 2. [GLOB-02] Create Week Off - Invalid Bearer Token (401)
+  type: http
+  seq: 2
+}
+
+post {
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/week-offs/create
+  body:json {
+{
+    "assignments":  [
+                        {
+                            "employeeId":  34,
+                            "effectiveFrom":  "2044-01-01",
+                            "departmentId":  1,
+                            "effectiveTo":  "2044-12-31",
+                            "locationId":  1,
+                            "isActive":  "Y"
+                        }
+                    ],
+    "description":  "Global",
+    "details":  [
+                    {
+                        "isWeekOff":  "Y",
+                        "weekNo":  1,
+                        "dayOfWeek":  "SUNDAY"
+                    }
+                ],
+    "isDefault":  "N",
+    "weekOffName":  "Global Week Off Policy",
+    "optionModel":  "ALLOWED",
+    "isActive":  "Y"
+}
+}
+  auth: none
+}
+
+headers {
+  Authorization: Bearer invalid_expired_mock_jwt_token_12345
+  Content-Type: application/json
+}

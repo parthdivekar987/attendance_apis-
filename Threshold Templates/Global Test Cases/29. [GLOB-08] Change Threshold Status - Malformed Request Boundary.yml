@@ -1,0 +1,16 @@
+﻿meta {
+  name: 29. [GLOB-08] Change Threshold Status - Malformed Request Boundary (400)
+  type: http
+  seq: 29
+}
+
+patch {
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/status-threshold/80/status?status=N
+  body: none
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{authToken}}
+  Content-Type: application/json
+}

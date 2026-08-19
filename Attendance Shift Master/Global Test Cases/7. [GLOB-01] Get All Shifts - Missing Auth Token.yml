@@ -1,0 +1,11 @@
+﻿meta {
+  name: 7. [GLOB-01] Get All Shifts - Missing Auth Token (401)
+  type: http
+  seq: 7
+}
+
+get {
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/v1/attendance/shift/master?page=0&size=10&sortBy=shiftId&sortDirection=DESC&includeDeleted=true
+  body: none
+  auth: none
+}

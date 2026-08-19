@@ -1,0 +1,38 @@
+﻿meta {
+  name: 2. [GLOB-02] Create Shift - Invalid Bearer Token (401)
+  type: http
+  seq: 2
+}
+
+post {
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/v1/attendance/shift/master
+  body:json {
+{
+    "shiftCode":  "SHF_GLOB_01",
+    "shiftType":  "FIXED",
+    "effectiveFrom":  "01-Aug-2026",
+    "breakConfigs":  [
+                         {
+                             "paidFlag":  false,
+                             "breakName":  "Lunch Break",
+                             "breakDurationMinutes":  60
+                         }
+                     ],
+    "effectiveTo":  "31-Dec-2026",
+    "applicableEmpIds":  null,
+    "description":  "Global Shift",
+    "isDeleted":  "N",
+    "endTime":  "18:00:00",
+    "applicabilityType":  "DEFAULT",
+    "shiftName":  "Global Standard Shift Alpha",
+    "startTime":  "09:00:00",
+    "remarks":  "Global"
+}
+}
+  auth: none
+}
+
+headers {
+  Authorization: Bearer invalid_expired_mock_jwt_token_12345
+  Content-Type: application/json
+}

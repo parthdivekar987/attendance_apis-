@@ -1,0 +1,11 @@
+﻿meta {
+  name: 7. [GLOB-01] Get All Policies - Missing Auth Token (401)
+  type: http
+  seq: 7
+}
+
+get {
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/late-early-policies/getAll?page=0&size=10&sort=policyId,desc
+  body: none
+  auth: none
+}

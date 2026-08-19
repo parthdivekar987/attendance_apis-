@@ -1,0 +1,16 @@
+﻿meta {
+  name: 17. [GLOB-08] Get Week Off By ID - Malformed Request Boundary (400)
+  type: http
+  seq: 17
+}
+
+get {
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/week-offs/getById/134
+  body: none
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{authToken}}
+  Content-Type: application/json
+}

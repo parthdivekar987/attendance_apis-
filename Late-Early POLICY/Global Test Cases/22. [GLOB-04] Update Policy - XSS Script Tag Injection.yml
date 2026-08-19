@@ -1,0 +1,45 @@
+﻿meta {
+  name: 22. [GLOB-04] Update Policy - XSS Script Tag Injection (400)
+  type: http
+  seq: 22
+}
+
+put {
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/late-early-policies/update/138
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{authToken}}
+  Content-Type: application/json
+}
+
+body:json {
+{
+    "policyId":  138,
+    "effectiveFrom":  "2027-01-01",
+    "graceEvent":  2,
+    "effectiveTo":  "2027-12-31",
+    "isDefault":  "N",
+    "policyName":  "Global Update LEP",
+    "isActive":  "Y",
+    "assignments":  [
+                        {
+                            "effectiveFrom":  "2027-01-01",
+                            "employeeId":  34,
+                            "effectiveTo":  "2027-12-31",
+                            "isActive":  "Y"
+                        }
+                    ],
+    "graceMinutes":  10,
+    "description":  "\u003cscript\u003ealert(\u0027XSS\u0027)\u003c/script\u003e",
+    "deductionType":  "LEAVE",
+    "policyCode":  "LEP00137",
+    "eventCountMinutes":  30,
+    "leaveTypeId":  1,
+    "allowedEvent":  3,
+    "templateMode":  "CUSTOM",
+    "leaveDeductDays":  0.5
+}
+}

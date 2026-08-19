@@ -1,0 +1,36 @@
+﻿meta {
+  name: 19. [GLOB-01] Update Holiday Template - Missing Auth Token (401)
+  type: http
+  seq: 19
+}
+
+put {
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/holiday-templates/update/1
+  body:json {
+{
+    "assignments":  [
+                        {
+                            "effectiveFrom":  "2026-01-01",
+                            "employeeId":  34,
+                            "effectiveTo":  "2026-12-31",
+                            "isActive":  "Y"
+                        }
+                    ],
+    "effectiveFrom":  "2026-01-01",
+    "description":  "Global",
+    "templateMode":  "CUSTOM",
+    "holidays":  [
+                     {
+                         "holidayName":  "Republic Day",
+                         "isOptional":  "N",
+                         "holidayDate":  "2026-01-26"
+                     }
+                 ],
+    "effectiveTo":  "2026-12-31",
+    "holidayTemplateName":  "Global Updated Holiday",
+    "isActive":  "Y",
+    "isDefault":  "N"
+}
+}
+  auth: none
+}

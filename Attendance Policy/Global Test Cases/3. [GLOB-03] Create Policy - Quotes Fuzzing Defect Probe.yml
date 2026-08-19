@@ -1,0 +1,24 @@
+﻿meta {
+  name: 3. [GLOB-03] Create Policy - Quotes Fuzzing Defect Probe
+  type: http
+  seq: 3
+}
+
+post {
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendancepolicy
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{authToken}}
+  Content-Type: application/json
+}
+
+body:json {
+{
+    "policyName":  "\"\"\"\"\"\"",
+    "policyDescription":  "Global standard attendance compliance",
+    "policyHeading":  "Punctuality Policy"
+}
+}

@@ -1,0 +1,15 @@
+﻿meta {
+  name: 34. [GLOB-07] Delete Threshold - Negative ID -1 Validation
+  type: http
+  seq: 34
+}
+
+delete {
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/status-threshold/delete/-1
+  body: none
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{authToken}}
+}

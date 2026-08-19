@@ -1,0 +1,16 @@
+﻿meta {
+  name: 30. [GLOB-09] Toggle Shift Status - Extreme Boundary Limit Test
+  type: http
+  seq: 30
+}
+
+patch {
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/v1/attendance/shift/master/status/61?action=DEACTIVATE
+  body: none
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{authToken}}
+  Content-Type: application/json
+}

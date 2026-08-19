@@ -1,0 +1,16 @@
+﻿meta {
+  name: 5. [GLOB-08] Create Policy - Malformed Request Boundary (400)
+  type: http
+  seq: 5
+}
+
+post {
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/late-early-policies/create
+  body: none
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{authToken}}
+  Content-Type: application/json
+}

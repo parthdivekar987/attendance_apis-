@@ -1,0 +1,16 @@
+﻿meta {
+  name: 12. [GLOB-09] Get All Thresholds - Extreme Boundary Limit Test
+  type: http
+  seq: 12
+}
+
+get {
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/status-threshold/getAll?page=0&size=10&sort=thresholdId,desc
+  body: none
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{authToken}}
+  Content-Type: application/json
+}

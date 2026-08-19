@@ -1,0 +1,16 @@
+﻿meta {
+  name: 30. [GLOB-09] Change Threshold Status - Extreme Boundary Limit Test
+  type: http
+  seq: 30
+}
+
+patch {
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/status-threshold/80/status?status=N
+  body: none
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{authToken}}
+  Content-Type: application/json
+}

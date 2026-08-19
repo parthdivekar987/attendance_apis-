@@ -1,0 +1,16 @@
+﻿meta {
+  name: 6. [GLOB-09] Create Holiday Template - Extreme Boundary Limit Test
+  type: http
+  seq: 6
+}
+
+post {
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/holiday-templates/create
+  body: none
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{authToken}}
+  Content-Type: application/json
+}

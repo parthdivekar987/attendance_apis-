@@ -1,0 +1,15 @@
+﻿meta {
+  name: 9. [GLOB-05] Get All Policies - Non-Existent ID 999999 (404)
+  type: http
+  seq: 9
+}
+
+get {
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendancepolicy
+  body: none
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{authToken}}
+}

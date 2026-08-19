@@ -1,0 +1,15 @@
+﻿meta {
+  name: 28. [GLOB-07] Toggle Policy Status - Negative ID -1 Validation
+  type: http
+  seq: 28
+}
+
+patch {
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendancepolicy/-1/status?action=DEACTIVATE
+  body: none
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{authToken}}
+}

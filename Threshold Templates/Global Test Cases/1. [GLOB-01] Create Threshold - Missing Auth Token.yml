@@ -1,0 +1,37 @@
+﻿meta {
+  name: 1. [GLOB-01] Create Threshold - Missing Auth Token (401)
+  type: http
+  seq: 1
+}
+
+post {
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/status-threshold/create
+  body:json {
+{
+    "thresholdName":  "Global Threshold",
+    "effectiveFrom":  "2043-01-01",
+    "halfDayMinHours":  3.01,
+    "fullDayMinHours":  6,
+    "isActive":  "Y",
+    "templateStatus":  "DRAFT",
+    "absentMaxHours":  3,
+    "presentMinHours":  8,
+    "description":  "Global",
+    "templateMode":  "CUSTOM",
+    "shiftTypeApplicability":  "Fixed",
+    "assignments":  [
+                        {
+                            "effectiveFrom":  "2043-01-01",
+                            "employeeId":  34,
+                            "effectiveTo":  "2043-12-31",
+                            "isActive":  "Y"
+                        }
+                    ],
+    "effectiveTo":  "2043-12-31",
+    "isDefault":  "N",
+    "remarks":  "Global",
+    "thresholdCode":  "TH_GLOB"
+}
+}
+  auth: none
+}

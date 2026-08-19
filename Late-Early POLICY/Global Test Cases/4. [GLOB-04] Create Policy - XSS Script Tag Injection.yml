@@ -1,0 +1,44 @@
+﻿meta {
+  name: 4. [GLOB-04] Create Policy - XSS Script Tag Injection (400)
+  type: http
+  seq: 4
+}
+
+post {
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/late-early-policies/create
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{authToken}}
+  Content-Type: application/json
+}
+
+body:json {
+{
+    "effectiveFrom":  "2042-01-01",
+    "graceEvent":  2,
+    "effectiveTo":  "2042-12-31",
+    "isDefault":  "N",
+    "policyName":  "Global Late Early Policy",
+    "isActive":  "Y",
+    "assignments":  [
+                        {
+                            "effectiveFrom":  "2042-01-01",
+                            "employeeId":  34,
+                            "effectiveTo":  "2042-12-31",
+                            "isActive":  "Y"
+                        }
+                    ],
+    "graceMinutes":  10,
+    "description":  "\u003cscript\u003ealert(\u0027XSS\u0027)\u003c/script\u003e",
+    "deductionType":  "LEAVE",
+    "policyCode":  null,
+    "eventCountMinutes":  30,
+    "leaveTypeId":  1,
+    "allowedEvent":  3,
+    "templateMode":  "CUSTOM",
+    "leaveDeductDays":  0.5
+}
+}

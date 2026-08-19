@@ -1,0 +1,16 @@
+﻿meta {
+  name: 23. [GLOB-08] Update Week Off - Malformed Request Boundary (400)
+  type: http
+  seq: 23
+}
+
+put {
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/week-offs/update/134
+  body: none
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{authToken}}
+  Content-Type: application/json
+}

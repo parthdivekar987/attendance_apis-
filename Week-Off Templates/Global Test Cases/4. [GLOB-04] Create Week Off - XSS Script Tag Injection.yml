@@ -1,0 +1,43 @@
+﻿meta {
+  name: 4. [GLOB-04] Create Week Off - XSS Script Tag Injection (400)
+  type: http
+  seq: 4
+}
+
+post {
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/week-offs/create
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{authToken}}
+  Content-Type: application/json
+}
+
+body:json {
+{
+    "weekOffName":  "Global Week Off Policy",
+    "isDefault":  "N",
+    "isActive":  "Y",
+    "details":  [
+                    {
+                        "isWeekOff":  "Y",
+                        "weekNo":  1,
+                        "dayOfWeek":  "SUNDAY"
+                    }
+                ],
+    "description":  "\u003cscript\u003ealert(\u0027XSS\u0027)\u003c/script\u003e",
+    "assignments":  [
+                        {
+                            "employeeId":  34,
+                            "effectiveFrom":  "2044-01-01",
+                            "departmentId":  1,
+                            "effectiveTo":  "2044-12-31",
+                            "locationId":  1,
+                            "isActive":  "Y"
+                        }
+                    ],
+    "optionModel":  "ALLOWED"
+}
+}

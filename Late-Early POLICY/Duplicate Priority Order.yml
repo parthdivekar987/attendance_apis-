@@ -6,7 +6,54 @@ info:
 http:
   method: POST
   url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/late-early-policies/create
-  auth: inherit
+  headers:
+    - name: Authorization
+      value: bearer{{authToken}}
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |
+      {
+        "policyCode": null,
+        "policyName": "Duplicate Priority Test 2027",
+        "description": "Testing duplicate priority order 1 assigned to multiple leave types",
+        "templateMode": "CUSTOM",
+        "eventCountMinutes": 30,
+        "graceMinutes": 10,
+        "graceEvent": 2,
+        "allowedEvent": 3,
+        "deductionType": "LEAVE",
+        "leaveDeductDays": 0.50,
+        "leaveTypeId": 1,
+        "effectiveFrom": "2027-01-01",
+        "effectiveTo": "2027-12-31",
+        "isDefault": "N",
+        "isActive": "Y",
+        "deductionPriorities": [
+          {
+            "priorityOrder": 1,
+            "leaveTypeId": 1,
+            "isActive": "Y"
+          },
+          {
+            "priorityOrder": 1,
+            "leaveTypeId": 2,
+            "isActive": "Y"
+          }
+        ],
+        "assignments": [
+          {
+            "employeeId": 3964,
+            "effectiveFrom": "2027-01-01",
+            "effectiveTo": "2027-12-31",
+            "isActive": "Y"
+          }
+        ]
+      }
+  auth:
+    type: bearer
+    token: "{{authToken}}"
 
 settings:
   encodeUrl: true

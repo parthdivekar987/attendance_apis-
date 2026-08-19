@@ -1,0 +1,44 @@
+﻿meta {
+  name: 3. [GLOB-03] Create Threshold - Quotes Fuzzing Defect Probe
+  type: http
+  seq: 3
+}
+
+post {
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/status-threshold/create
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{authToken}}
+  Content-Type: application/json
+}
+
+body:json {
+{
+    "thresholdName":  "\"\"\"\"",
+    "effectiveFrom":  "2043-01-01",
+    "absentMaxHours":  3,
+    "remarks":  "Global",
+    "effectiveTo":  "2043-12-31",
+    "presentMinHours":  8,
+    "isDefault":  "N",
+    "isActive":  "Y",
+    "assignments":  [
+                        {
+                            "effectiveFrom":  "2043-01-01",
+                            "employeeId":  34,
+                            "effectiveTo":  "2043-12-31",
+                            "isActive":  "Y"
+                        }
+                    ],
+    "description":  "Global",
+    "halfDayMinHours":  3.01,
+    "fullDayMinHours":  6,
+    "thresholdCode":  "TH_GLOB",
+    "shiftTypeApplicability":  "Fixed",
+    "templateMode":  "CUSTOM",
+    "templateStatus":  "DRAFT"
+}
+}

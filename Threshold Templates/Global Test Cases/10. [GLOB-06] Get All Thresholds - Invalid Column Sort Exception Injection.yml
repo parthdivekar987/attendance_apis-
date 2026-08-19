@@ -1,0 +1,15 @@
+﻿meta {
+  name: 10. [GLOB-06] Get All Thresholds - Invalid Sort Injection (JPA Leak Probe)
+  type: http
+  seq: 10
+}
+
+get {
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/status-threshold/getAll?page=0&size=10&sort=thresholdId,desc&sort=invalid_col,desc
+  body: none
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{authToken}}
+}

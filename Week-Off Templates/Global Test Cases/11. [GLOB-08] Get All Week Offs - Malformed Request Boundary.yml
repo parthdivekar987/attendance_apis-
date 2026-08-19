@@ -1,0 +1,16 @@
+﻿meta {
+  name: 11. [GLOB-08] Get All Week Offs - Malformed Request Boundary (400)
+  type: http
+  seq: 11
+}
+
+get {
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/week-offs/getAll?page=0&size=10&sort=weekOffName,asc
+  body: none
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{authToken}}
+  Content-Type: application/json
+}

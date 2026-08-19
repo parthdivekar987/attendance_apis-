@@ -1,0 +1,16 @@
+﻿meta {
+  name: 32. [GLOB-02] Delete Threshold - Invalid Bearer Token (401)
+  type: http
+  seq: 32
+}
+
+delete {
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/status-threshold/delete/80
+  body: none
+  auth: none
+}
+
+headers {
+  Authorization: Bearer invalid_expired_mock_jwt_token_12345
+  Content-Type: application/json
+}

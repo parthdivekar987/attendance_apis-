@@ -1,0 +1,15 @@
+﻿meta {
+  name: 28. [GLOB-07] Toggle Week Off Status - Negative ID -1 Validation
+  type: http
+  seq: 28
+}
+
+patch {
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/week-offs/actDeact/-1/status
+  body: none
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{authToken}}
+}

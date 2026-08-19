@@ -1,0 +1,11 @@
+﻿meta {
+  name: 13. [GLOB-01] Get Holiday Template By ID - Missing Auth Token (401)
+  type: http
+  seq: 13
+}
+
+get {
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/holiday-templates/getById/1
+  body: none
+  auth: none
+}

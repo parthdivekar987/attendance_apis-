@@ -1,0 +1,16 @@
+﻿meta {
+  name: 6. [GLOB-09] Create Threshold - Extreme Boundary Limit Test
+  type: http
+  seq: 6
+}
+
+post {
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/status-threshold/create
+  body: none
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{authToken}}
+  Content-Type: application/json
+}

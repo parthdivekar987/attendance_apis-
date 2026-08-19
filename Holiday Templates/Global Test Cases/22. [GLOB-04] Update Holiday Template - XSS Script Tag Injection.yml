@@ -1,0 +1,43 @@
+﻿meta {
+  name: 22. [GLOB-04] Update Holiday Template - XSS Script Tag Injection (400)
+  type: http
+  seq: 22
+}
+
+put {
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/holiday-templates/update/1
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{authToken}}
+  Content-Type: application/json
+}
+
+body:json {
+{
+    "assignments":  [
+                        {
+                            "effectiveFrom":  "2026-01-01",
+                            "employeeId":  34,
+                            "effectiveTo":  "2026-12-31",
+                            "isActive":  "Y"
+                        }
+                    ],
+    "description":  "\u003cscript\u003ealert(\u0027XSS\u0027)\u003c/script\u003e",
+    "effectiveFrom":  "2026-01-01",
+    "templateMode":  "CUSTOM",
+    "holidays":  [
+                     {
+                         "holidayName":  "Republic Day",
+                         "isOptional":  "N",
+                         "holidayDate":  "2026-01-26"
+                     }
+                 ],
+    "holidayTemplateName":  "Global Updated Holiday",
+    "isActive":  "Y",
+    "isDefault":  "N",
+    "effectiveTo":  "2026-12-31"
+}
+}

@@ -1,0 +1,15 @@
+﻿meta {
+  name: 16. [GLOB-07] Get Policy By ID - Negative ID -1 Validation
+  type: http
+  seq: 16
+}
+
+get {
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/late-early-policies/getById/-1
+  body: none
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{authToken}}
+}

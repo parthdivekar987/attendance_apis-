@@ -1,0 +1,15 @@
+﻿meta {
+  name: 15. [GLOB-05] Get Threshold By ID - Non-Existent ID 999999 (404)
+  type: http
+  seq: 15
+}
+
+get {
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/status-threshold/getById/999999
+  body: none
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{authToken}}
+}

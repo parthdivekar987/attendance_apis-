@@ -1,0 +1,22 @@
+﻿meta {
+  name: 2. [GLOB-02] Create Policy - Invalid Bearer Token (401)
+  type: http
+  seq: 2
+}
+
+post {
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendancepolicy
+  body:json {
+{
+    "policyName":  "Global Standard Policy Alpha",
+    "policyDescription":  "Global standard attendance compliance",
+    "policyHeading":  "Punctuality Policy"
+}
+}
+  auth: none
+}
+
+headers {
+  Authorization: Bearer invalid_expired_mock_jwt_token_12345
+  Content-Type: application/json
+}

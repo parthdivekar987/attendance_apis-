@@ -1,0 +1,16 @@
+﻿meta {
+  name: 36. [GLOB-09] Delete Policy - Extreme Boundary Limit Test
+  type: http
+  seq: 36
+}
+
+delete {
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendancepolicy/22
+  body: none
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{authToken}}
+  Content-Type: application/json
+}

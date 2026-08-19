@@ -1,0 +1,16 @@
+﻿meta {
+  name: 6. [GLOB-09] Create Week Off - Extreme Boundary Limit Test
+  type: http
+  seq: 6
+}
+
+post {
+  url: https://uatmcdphcmplatform.omfysgroup.com/api/attendance/week-offs/create
+  body: none
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{authToken}}
+  Content-Type: application/json
+}
